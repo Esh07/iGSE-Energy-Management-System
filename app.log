@@ -6308,3 +6308,162 @@ INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:07:42] "GET /admin HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:07:43] "GET /admin/energy-statistics HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:08:45] "GET /admin HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:08:47] "GET /admin/bills HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+ERROR:flask_migrate:Error: Directory migrations already exists and is not empty
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 16:20:59] "[32mGET / HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 16:20:59] "GET /home HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 16:21:15] "[32mGET / HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 16:21:15] "GET /home HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 16:21:15] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 16:21:25] "[35m[1mGET /igse/propertycount HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 16:21:25] "GET /igse/propertycount?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 16:21:25] "GET /igse/propertycount?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 16:21:25] "GET /igse/propertycount?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 16:21:43] "[35m[1mGET /igse/propertycount HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 16:21:43] "[36mGET /igse/propertycount?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 16:21:43] "[36mGET /igse/propertycount?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 16:21:43] "[36mGET /igse/propertycount?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 16:24:00] "GET /igse/propertycount HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 16:25:18] "GET /igse/propertycount HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 16:28:01] "[33mGET /igse/flat/ HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 16:28:11] "[33mGET /igse/flat/2 HTTP/1.1[0m" 404 -
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 16:41:35] "GET /igse/flat/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 16:41:38] "GET /igse/flat/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 16:41:40] "GET /igse/flat/1 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 16:41:45] "GET /igse/flat/0 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 16:41:47] "GET /igse/flat/1 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 16:42:01] "GET /igse/flat/2 HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 16:54:42] "GET /igse/flat/2 HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 16:58:29] "GET /igse/flat/2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 16:58:33] "GET /igse/flat/2 HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 16:59:04] "GET /igse/flat/2 HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 17:03:23] "GET /igse/flat/2 HTTP/1.1" 200 -

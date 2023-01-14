@@ -6,6 +6,7 @@ from wtforms.validators import Email, DataRequired, Length, EqualTo, NumberRange
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, LoginManager, login_user, login_required, logout_user, current_user
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy import func
 
 from .validator import IsInteger
 import json
@@ -26,6 +27,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = secrets.token_urlsafe(16)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://api_user:123456@localhost:3306/RestServiceInterface'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['JSON_SORT_KEYS'] = False
 db = SQLAlchemy(app)
 
 logging.basicConfig(filename='app.log', level=logging.DEBUG)
@@ -854,6 +856,66 @@ def admin_energy_statistics():
 
     # standing_charge_per_day = standing_charge_per_day / len(bills)
     return render_template('admin_energy_statistics.html', electricity_day_per_kWh=electricity_day_per_kWh, electricity_night_per_kWh=electricity_night_per_kWh, gas_per_kWh=gas_per_kWh, standing_charge_per_day=standing_charge_per_day)
+
+
+# ====------- Task 2 API -------====
+@app.route('/igse/propertycount', methods=['GET'])
+def get_property_count():
+    print('get_property_count')
+    # Query the database to group properties by type and count the number of properties in each group
+    property_count = db.session.query(User.property_type, func.count(User.property_type)) \
+        .filter(User.property_type != None) \
+        .group_by(User.property_type) \
+        .all()
+
+    # Create a list to hold the property count data
+    data = []
+
+    # Loop through the property count data and add it to the list in the desired format
+    for item in property_count:
+        data.append({item[0]: item[1]})
+        print(item[0])
+
+    # Return the data in JSON format
+    return jsonify(data)
+
+
+@app.route("/igse/<property_type>/<num_bedrooms>")
+def energy_usage_stats(property_type, num_bedrooms):
+    try:
+        # Join the User and Bill tables and filter by property_type and num_bedrooms
+        user_bills = db.session.query(User, Bill).join(Bill).filter(
+            User.property_type == property_type, User.num_bedrooms == num_bedrooms).all()
+        if not user_bills:
+            raise ValueError(
+                "No bills found for the specified property type and number of bedrooms.")
+        total_electricity_gas_cost = 0
+        num_bills = 0
+        for user, bill in user_bills:
+            # Calculate the number of days between the start and end date of the bill
+            num_days = (bill.end_date - bill.start_date).days
+            # Add the bill amount to the total cost
+            total_electricity_gas_cost += bill.bill_amount
+            num_bills += 1
+        if num_bills == 0:
+            raise ValueError(
+                "No bills found for the specified property type and number of bedrooms.")
+        try:
+            # Divide the total cost by the number of days to get the average cost per day
+            average_electricity_gas_cost_per_day = total_electricity_gas_cost / num_bills
+        except ZeroDivisionError:
+            average_electricity_gas_cost_per_day = 0
+
+    except Exception as e:
+        return jsonify({"error": "An unknown error occurred. Please try again later."})
+
+    # Return the energy usage statistics in a JSON response
+    return jsonify(
+        {"type": property_type,
+         "bedroom": num_bedrooms,
+         "average_electricity_gas_cost_per_day": average_electricity_gas_cost_per_day,
+         "unit": "pound"}
+    )
 
 
 if __name__ == '__main__':
