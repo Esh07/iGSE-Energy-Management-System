@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login</title>
+</head>
+
+<body>
+    <h1>Login</h1>
+    <form action="/login" method="post">
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.email(placeholder="Enter your email", size=32) }}
+            <p>
+                {% for error in form.email.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+        </div>
+        <div>
+            {{ form.password(placeholder="Enter your password", size=32) }}
+            <p>
+                {% for error in form.password.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+        </div>
+        <div>
+            {{ form.submit() }}
+        </div>
+
+
+</body>
+
+</html>

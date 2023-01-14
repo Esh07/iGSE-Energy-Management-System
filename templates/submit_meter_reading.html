@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Meter Reading</title>
+</head>
+
+<body>
+    <h1>Submit Meter Reading</h1>
+    <form action="{{ url_for('submit_meter_reading') }}" method="post">
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.date( placeholder=date, size=32) }}
+            <p>
+                {% for error in form.date.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+
+        </div>
+        <div>
+
+            {{ form.electricity_day(placeholder="Enter the electricity meter reading - Day", size=32) }}
+            <p>
+                {% for error in form.electricity_day.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+
+        </div>
+
+        <div>
+
+            {{ form.electricity_night(placeholder="Enter the electricity meter reading - Night", size=32) }}
+            <p>
+                {% for error in form.electricity_night.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+
+        </div>
+
+        <div>
+
+            {{ form.gas(placeholder="Enter the gas meter reading", size=32) }}
+            <p>
+                {% for error in form.gas.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+
+        </div>
+
+        <div>
+            {{ form.submit() }}
+        </div>
+    </form>
+
+</body>
+
+</html>

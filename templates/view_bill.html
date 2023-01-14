@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>View Bill</title>
+</head>
+
+<body>
+    <h1>View Bill</h1>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+    <table>
+        <tr>
+            <th>Bill ID</th>
+            <th>Customer ID</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Electricity Day Reading (kWh)</th>
+            <th>Electricity Night Reading (kWh)</th>
+            <th>Gas Reading (kWh)</th>
+            <th>Bill Amount</th>
+            <th>Created At</th>
+            <th>Paid At</th>
+            <th>Is Paid</th>
+        </tr>
+        {% if bill %}
+        <tr>
+            <td>{{ bill.id }}</td>
+            <td>{{ bill.customer_id }}</td>
+            <td>{{ bill.start_date }}</td>
+            <td>{{ bill.end_date }}</td>
+            <td>{{ bill.electricity_day_reading }}</td>
+            <td>{{ bill.electricity_night_reading }}</td>
+            <td>{{ bill.gas_reading }}</td>
+            <td>{{ bill.bill_amount }}</td>
+            <td>{{ bill.created_at }}</td>
+            <td>{{ bill.paid_at }}</td>
+            <td>{{ bill.is_paid }}</td>
+            <td>
+                <a href="{{ url_for('pay_bill', bill_id=bill.id) }}" class="btn btn-primary">Pay</a>
+            </td>
+
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="11">No unpaid bills found.</td>
+        </tr>
+        {% endif %}
+
+    </table>
+
+</body>
+
+</html>

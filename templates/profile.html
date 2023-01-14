@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile page</title>
+</head>
+
+<body>
+    <h1>Profile page</h1>
+    <p>Welcome, {{ current_user.email }}</p>
+    <p>Address: {{ current_user.address }}</p>
+    <p>Property Type: {{ current_user.property_type }}</p>
+    <p>Number of Bedrooms: {{ current_user.num_bedrooms }}</p>
+    <p>EVC: {{ current_user.evc }}</p>
+    <p>Energy Credit: {{ current_user.energy_credit }}</p>
+    <p>Energy Bill: {{ current_user.energy_bill }}</p>
+    <a href="{{ url_for('logout') }}">Logout</a>
+    <a href="{{ url_for('submit_meter_reading') }}">Submit Meter Reading</a>
+
+</body>
+
+</html>
