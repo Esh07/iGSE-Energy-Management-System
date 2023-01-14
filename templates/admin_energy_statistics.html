@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy statistics</title>
+</head>
+
+<body>
+
+    <h1>Energy statistics</h1>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    <!-- dsiplay averge energy consumption "admin_energy_statistics"-->
+    <h2> Average energy consumption</h2>
+
+    <!-- I need to two table here one for Electricity which will have Electricity Day and Electrivity night and another table for Gas -->
+    <table>
+        <thead>
+            <tr>
+                <th>Electricity Day</th>
+                <th>Electricity Night</th>
+                <th>Gas</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ electricity_day_per_kWh }}</td>
+                <td>{{ electricity_night_per_kWh }}</td>
+                <td>{{ gas_per_kWh }}</td>
+            </tr>
+        </tbody>
+
+
+</body>
+
+</html>

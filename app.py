@@ -66,7 +66,9 @@ class User(UserMixin, db.Model):
     evc = db.Column(db.Integer, db.ForeignKey('evc.id'))
     energy_credit = db.Column(db.Float, default=200)
     joined_on = db.Column(db.DateTime, default=datetime.utcnow)
-    bills = db.relationship('Bill', backref='users', lazy=True)
+    bill = db.relationship('Bill', back_populates='user', lazy=True)
+    meter_readings = db.relationship(
+        'MeterReading', back_populates='user', lazy=True)
     is_admin = db.Column(db.Boolean, default=False)
 
     def __init__(self, email, password, address, property_type, num_bedrooms, evc):
@@ -184,7 +186,9 @@ class Tariff(db.Model):
 
 class MeterReading(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    customer_id = db.Column(db.Integer, nullable=False)
+    customer_id = db.Column(
+        db.Integer, db.ForeignKey('users.id'), nullable=False, )
+    user = db.relationship("User", back_populates="meter_readings")
     # date format YYYY-MM-DD and by default make it today's date
     date = db.Column(db.Date, nullable=False, default=datetime.today())
     electricity_day = db.Column(db.Float, nullable=False)
@@ -222,7 +226,7 @@ class Bill(db.Model):
     # customer_id = db.Column(db.Integer, nullable=False)
     customer_id = db.Column(
         db.Integer, db.ForeignKey('users.id'), nullable=False)
-    user = db.relationship("User", back_populates="bills")
+    user = db.relationship("User", back_populates="bill")
     start_date = db.Column(db.Date, nullable=False)
     end_date = db.Column(db.Date, nullable=False)
     electricity_day_reading = db.Column(db.Float, nullable=False)
@@ -802,6 +806,54 @@ def admin_view_bill(bill_id):
         return redirect(url_for('index'))
     bill = Bill.query.get_or_404(bill_id)
     return render_template('admin_view_bill.html', bill=bill)
+
+
+# view all submitted meter readings
+@app.route('/admin/meter-readings')
+@login_required
+def admin_view_meter_readings():
+    if not current_user.is_admin:
+        flash('You must be an admin to access this page.')
+        return redirect(url_for('index'))
+    meter_readings = MeterReading.query.all()
+    return render_template('admin_view_meter_readings.html', meter_readings=meter_readings)
+
+# getting the  "Admin can view the energy statistics– show the average gas and electricity consumption (in kWh) per day for all customers based on their latest billing period."
+
+
+@app.route('/admin/energy-statistics')
+@login_required
+def admin_energy_statistics():
+    if not current_user.is_admin:
+        flash('You must be an admin to access this page.')
+        return redirect(url_for('index'))
+    bills = Bill.query.all()
+    electricity_day_per_kWh = 0
+    electricity_night_per_kWh = 0
+    gas_per_kWh = 0
+    standing_charge_per_day = 0
+    for bill in bills:
+        electricity_day_per_kWh += bill.electricity_day_reading
+        electricity_night_per_kWh += bill.electricity_night_reading
+        gas_per_kWh += bill.gas_reading
+        # standing_charge_per_day += bill.standing_charge_per_day
+    try:
+        electricity_day_per_kWh = electricity_day_per_kWh / len(bills)
+        electricity_night_per_kWh = electricity_night_per_kWh / len(bills)
+        gas_per_kWh = gas_per_kWh / len(bills)
+        print(len(bills))
+        print(electricity_day_per_kWh)
+        print(electricity_night_per_kWh)
+        print(gas_per_kWh)
+
+    except ZeroDivisionError:
+        electricity_day_per_kWh = 0
+        electricity_night_per_kWh = 0
+        gas_per_kWh = 0
+        return render_template('admin_energy_statistics.html', electricity_day_per_kWh=electricity_day_per_kWh, electricity_night_per_kWh=electricity_night_per_kWh, gas_per_kWh=gas_per_kWh, standing_charge_per_day=standing_charge_per_day)
+
+    # standing_charge_per_day = standing_charge_per_day / len(bills)
+    return render_template('admin_energy_statistics.html', electricity_day_per_kWh=electricity_day_per_kWh, electricity_night_per_kWh=electricity_night_per_kWh, gas_per_kWh=gas_per_kWh, standing_charge_per_day=standing_charge_per_day)
 
 
 if __name__ == '__main__':

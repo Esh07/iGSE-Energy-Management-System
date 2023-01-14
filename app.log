@@ -5783,3 +5783,528 @@ INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 13:48:44] "GET /admin HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 13:48:46] "GET /admin/bills HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 13:48:47] "GET /admin/bills?bill_id=2 HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 13:48:53] "GET /admin/bills?bill_id=1 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 13:51:09] "GET /admin/bills?bill_id=1 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 13:51:13] "GET /admin/bills/1 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 13:51:16] "GET /admin/bills/2 HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 13:55:18] "[31m[1mGET /admin/energy-statistics HTTP/1.1[0m" 401 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 13:55:22] "GET /admin/login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 13:55:25] "[32mPOST /admin/login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 13:55:25] "GET /admin HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 13:55:30] "[35m[1mGET /admin/energy-statistics HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 13:55:30] "GET /admin/energy-statistics?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 13:55:30] "GET /admin/energy-statistics?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 13:55:30] "GET /admin/energy-statistics?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:00:17] "[31m[1mGET /admin/energy-statistics HTTP/1.1[0m" 401 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:00:20] "GET /admin/login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:00:23] "[32mPOST /admin/login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:00:23] "[35m[1mGET /admin HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:00:23] "[36mGET /admin?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:00:23] "[36mGET /admin?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:00:23] "[36mGET /admin?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:01:00] "GET /admin HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:01:01] "GET /admin/bills HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:01:05] "GET /admin/energy-statistics HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+ERROR:flask_migrate:Error: Directory migrations already exists and is not empty
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:07:58] "[32mGET / HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:07:58] "GET /home HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:08:00] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:08:02] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:08:02] "[36mGET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:08:02] "[36mGET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:08:02] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+ERROR:flask_migrate:Error: Directory migrations already exists and is not empty
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:09:11] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:09:13] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:09:13] "[36mGET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:09:13] "[36mGET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:09:13] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+ERROR:flask_migrate:Error: Directory migrations already exists and is not empty
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:11:38] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:11:41] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:11:41] "[36mGET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:11:41] "[36mGET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:11:41] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+ERROR:flask_migrate:Error: Directory migrations already exists and is not empty
+INFO:flask_wtf.csrf:The CSRF token is invalid.
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:12:59] "POST /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:12:59] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:13:00] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:13:00] "[36mGET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:13:00] "[36mGET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:13:00] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+ERROR:flask_migrate:Error: Directory migrations already exists and is not empty
+INFO:flask_wtf.csrf:The CSRF token is invalid.
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:14:29] "POST /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:14:29] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:14:31] "[35m[1mPOST /login HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:14:31] "[36mGET /login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:14:31] "[36mGET /login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:14:31] "[36mGET /login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+ERROR:flask_migrate:Error: Directory migrations already exists and is not empty
+ERROR:flask_migrate:Error: Directory migrations already exists and is not empty
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:17:32] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:17:35] "POST /login HTTP/1.1" 200 -
+DEBUG:root:Form not valid
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:17:37] "GET /register HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:17:47] "[32mPOST /register HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:17:47] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:17:49] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:17:49] "GET /profile HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:19:44] "GET /profile HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:19:47] "GET /top-up HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:20:00] "[33mGET /admin/lgin HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:20:02] "GET /admin/login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:20:05] "[32mPOST /admin/login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:20:05] "GET /admin/register HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:20:08] "[32mPOST /admin/register HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:20:08] "[32mGET /admin HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:20:08] "GET /admin/login?messages=You+are+now+a+registered+admin! HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:20:10] "[32mPOST /admin/login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:20:10] "GET /admin HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:20:12] "[35m[1mGET /admin/energy-statistics HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:20:12] "[36mGET /admin/energy-statistics?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:20:12] "[36mGET /admin/energy-statistics?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:20:12] "[36mGET /admin/energy-statistics?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:22:08] "[31m[1mGET /admin/energy-statistics HTTP/1.1[0m" 401 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:22:11] "GET /admin/login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:22:13] "[32mPOST /admin/login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:22:13] "GET /admin HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:22:15] "GET /admin/energy-statistics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:26:06] "GET /admin/energy-statistics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:26:41] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:26:43] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:26:43] "GET /profile HTTP/1.1" 200 -
+DEBUG:root:Form not valid
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:26:46] "GET /submit-meter-reading HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:26:54] "[32mPOST /submit-meter-reading HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:26:54] "GET /home HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:26:55] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:26:58] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:26:58] "GET /profile HTTP/1.1" 200 -
+DEBUG:root:Form not valid
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:26:59] "GET /submit-meter-reading HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:27:09] "[32mPOST /submit-meter-reading HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:27:09] "GET /view_latest_bill HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:27:13] "[32mGET / HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:27:13] "GET /home HTTP/1.1" 200 -
+DEBUG:root:Form not valid
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:27:14] "GET /register HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:27:24] "POST /register HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:27:43] "[32mPOST /register HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:27:43] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:27:46] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:27:46] "GET /profile HTTP/1.1" 200 -
+DEBUG:root:Form not valid
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:27:48] "GET /submit-meter-reading HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:28:03] "[32mPOST /submit-meter-reading HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:28:03] "GET /home HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:28:04] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:28:07] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:28:07] "GET /profile HTTP/1.1" 200 -
+DEBUG:root:Form not valid
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:28:08] "GET /submit-meter-reading HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:28:16] "[32mPOST /submit-meter-reading HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:28:16] "GET /view_latest_bill HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:28:23] "GET /admin/login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:28:26] "[32mPOST /admin/login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:28:26] "GET /admin HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:28:28] "GET /admin/energy-statistics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:29:10] "GET /admin HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:29:12] "GET /admin/bills HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:29:47] "GET /admin/bills?bill_id=1 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:29:51] "GET /admin/bills?bill_id=2 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:30:11] "GET /admin HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:30:13] "GET /admin/energy-statistics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:30:16] "[33mGET /admin/ HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:30:18] "GET /admin HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:30:42] "GET /admin/meter-readings HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:30:52] "GET /admin/meter-readings?meter_reading_id=1 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:30:54] "GET /admin/meter-readings?meter_reading_id=1 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:30:55] "GET /admin/meter-readings?meter_reading_id=1 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:32:07] "GET /admin HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:32:08] "GET /admin/energy-statistics HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:36:07] "[31m[1mGET /admin/energy-statistics HTTP/1.1[0m" 401 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:36:10] "GET /admin/login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:36:12] "[32mPOST /admin/login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:36:12] "GET /admin HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:36:13] "GET /admin/energy-statistics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:38:27] "[31m[1mGET /admin/energy-statistics HTTP/1.1[0m" 401 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:38:30] "GET /admin/login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:38:33] "[32mPOST /admin/login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:38:33] "GET /admin HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:38:34] "GET /admin/energy-statistics HTTP/1.1" 200 -
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+ERROR:flask_migrate:Error: Directory migrations already exists and is not empty
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:48:11] "[31m[1mGET /admin/energy-statistics HTTP/1.1[0m" 401 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:48:15] "GET /admin/login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:48:18] "[35m[1mPOST /admin/login HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:48:18] "[36mGET /admin/login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:48:18] "[36mGET /admin/login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:48:18] "[36mGET /admin/login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+ERROR:flask_migrate:Error: Directory migrations already exists and is not empty
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:50:00] "GET /admin/login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:50:02] "[35m[1mPOST /admin/login HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:50:02] "[36mGET /admin/login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:50:02] "[36mGET /admin/login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:50:02] "[36mGET /admin/login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+ERROR:flask_migrate:Error: Directory migrations already exists and is not empty
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:50:38] "GET /admin/login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:50:41] "[35m[1mPOST /admin/login HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:50:41] "[36mGET /admin/login?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:50:41] "[36mGET /admin/login?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:50:41] "[36mGET /admin/login?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+INFO:werkzeug: * Detected change in '/Users/prakash/Desktop/kartik/api_project/app.py', reloading
+INFO:werkzeug: * Restarting with stat
+ERROR:flask_migrate:Error: Directory migrations already exists and is not empty
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:51:19] "GET /admin/login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:51:22] "[32mPOST /admin/login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:51:22] "GET /admin/register HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:51:24] "[32mPOST /admin/register HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:51:24] "[32mGET /admin HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:51:24] "GET /admin/login?messages=You+are+now+a+registered+admin! HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:51:31] "[32mPOST /admin/login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:51:31] "GET /admin HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:51:32] "GET /admin/energy-statistics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:51:38] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:51:46] "POST /login HTTP/1.1" 200 -
+DEBUG:root:Form not valid
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:51:51] "GET /register HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:52:01] "[32mPOST /register HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:52:01] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:52:03] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:52:03] "GET /profile HTTP/1.1" 200 -
+DEBUG:root:Form not valid
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:52:05] "GET /submit-meter-reading HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:52:11] "[32mPOST /submit-meter-reading HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:52:11] "GET /home HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:52:13] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:52:15] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:52:15] "GET /profile HTTP/1.1" 200 -
+DEBUG:root:Form not valid
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:52:16] "GET /submit-meter-reading HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:52:23] "[32mPOST /submit-meter-reading HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:52:24] "GET /view_latest_bill HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:52:29] "GET /login HTTP/1.1" 200 -
+DEBUG:root:Form not valid
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:52:32] "GET /register HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:52:43] "[32mPOST /register HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:52:43] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:52:45] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:52:45] "GET /profile HTTP/1.1" 200 -
+DEBUG:root:Form not valid
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:52:47] "GET /submit-meter-reading HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:52:56] "[32mPOST /submit-meter-reading HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:52:56] "GET /home HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:53:04] "GET /admin/login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:53:07] "[32mPOST /admin/login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:53:07] "GET /admin HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:53:09] "GET /admin/energy-statistics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:54:38] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:54:40] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:54:40] "GET /profile HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:54:42] "[32mGET /view_latest_bill HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:54:42] "GET /home HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:54:43] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:54:45] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:54:45] "GET /profile HTTP/1.1" 200 -
+DEBUG:root:Form not valid
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:54:48] "GET /submit-meter-reading HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:54:56] "[32mPOST /submit-meter-reading HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:54:56] "GET /home HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:54:57] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:55:00] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:55:00] "GET /profile HTTP/1.1" 200 -
+DEBUG:root:Form not valid
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:55:01] "GET /submit-meter-reading HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:55:08] "[32mPOST /submit-meter-reading HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:55:08] "GET /home HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:55:14] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:55:16] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:55:16] "GET /profile HTTP/1.1" 200 -
+DEBUG:root:Form not valid
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:55:18] "GET /submit-meter-reading HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:55:29] "[32mPOST /submit-meter-reading HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:55:29] "GET /home HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:55:30] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:55:32] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:55:32] "GET /profile HTTP/1.1" 200 -
+DEBUG:root:Form not valid
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:55:34] "GET /submit-meter-reading HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:55:47] "[32mPOST /submit-meter-reading HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 14:55:47] "GET /view_latest_bill HTTP/1.1" 200 -
+ERROR:flask_migrate:Error: Directory migrations already exists and is not empty
+DEBUG:root:Form not valid
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:01:51] "GET /register HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:02:03] "[32mPOST /register HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:02:03] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:02:05] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:02:05] "GET /profile HTTP/1.1" 200 -
+DEBUG:root:Form not valid
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:02:07] "GET /submit-meter-reading HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:02:27] "[32mPOST /submit-meter-reading HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:02:27] "GET /home HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:02:28] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:02:30] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:02:30] "GET /profile HTTP/1.1" 200 -
+DEBUG:root:Form not valid
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:02:32] "GET /submit-meter-reading HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:03:07] "[32mPOST /submit-meter-reading HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:03:07] "GET /view_latest_bill HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:04:33] "[32mGET /pay_bill/1 HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:04:33] "[32mGET /view_latest_bill HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:04:33] "GET /home HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:04:35] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:04:37] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:04:37] "GET /profile HTTP/1.1" 200 -
+DEBUG:root:Form not valid
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:04:38] "GET /submit-meter-reading HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:04:53] "[32mPOST /submit-meter-reading HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:04:53] "GET /view_latest_bill HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:05:14] "GET /login HTTP/1.1" 200 -
+DEBUG:root:Form not valid
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:05:19] "GET /register HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:05:30] "[32mGET / HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:05:30] "GET /home HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:05:44] "[32mPOST /register HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:05:44] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:05:47] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:05:47] "GET /profile HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:05:49] "[32mGET /view_latest_bill HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:05:49] "GET /home HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:05:50] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:05:53] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:05:53] "GET /profile HTTP/1.1" 200 -
+DEBUG:root:Form not valid
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:05:56] "GET /submit-meter-reading HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:06:13] "[32mPOST /submit-meter-reading HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:06:13] "GET /home HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:06:22] "GET /login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:06:24] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:06:24] "GET /profile HTTP/1.1" 200 -
+DEBUG:root:Form not valid
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:06:25] "GET /submit-meter-reading HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:06:38] "[32mPOST /submit-meter-reading HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:06:38] "GET /view_latest_bill HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:07:23] "[33mGET /admilogin HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:07:26] "[33mGET /adm/login HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:07:31] "GET /admin/login HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:07:36] "[32mPOST /admin/login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:07:36] "GET /admin/register HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:07:39] "[32mPOST /admin/register HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:07:39] "[32mGET /admin HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:07:39] "GET /admin/login?messages=You+are+now+a+registered+admin! HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:07:42] "[32mPOST /admin/login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:07:42] "GET /admin HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:07:43] "GET /admin/energy-statistics HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:08:45] "GET /admin HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Jan/2023 15:08:47] "GET /admin/bills HTTP/1.1" 200 -
