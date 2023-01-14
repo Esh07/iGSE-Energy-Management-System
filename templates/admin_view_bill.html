@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Specific bill</title>
+</head>
+
+<body>
+    <h1>Bill Details</h1>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+    <a href="{{ url_for('admin_view_bills') }}">Back to all bills</a>
+
+    <h2> {{ bill.user.email }} bill details</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Bill Amount</th>
+                <th>Bill Date</th>
+                <th>User Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ bill.bill_amount }}</td>
+                <td>{{ bill.created_at }}</td>
+                <td>{{ bill.user.email }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+
+</html>

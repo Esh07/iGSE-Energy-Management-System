@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Admin Login</title>
+</head>
+
+<body>
+    <h1>Admin Login</h1>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    <form method="post" action="{{ url_for('admin_login') }}">
+        {{ form.hidden_tag() }}
+        <label for="username">Username:</label>
+        {{ form.email }}
+        <br>
+        <label for="password">Password:</label>
+        {{ form.password }}
+        <br>
+        <input type="submit" value="Login">
+    </form>
+</body>
+
+</html>

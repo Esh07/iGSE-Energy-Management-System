@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Tariffs</title>
+</head>
+
+<body>
+    <h1>Update Tariffs</h1>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <table>
+            {{ form.electricity_day_per_kWh.label.text }}
+            {{ form.electricity_day_per_kWh(size=20, value=0.15) }}
+            {% if form.electricity_day_per_kWh.errors %}
+            <ul class=errors>
+                {% for error in form.electricity_day_per_kWh.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+        </table>
+        <table>
+            {{ form.electricity_night_per_kWh.label.text }}
+            {{ form.electricity_night_per_kWh(size=20, value=0.10) }}
+            {% if form.electricity_night_per_kWh.errors %}
+            <ul class=errors>
+                {% for error in form.electricity_night_per_kWh.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+        </table>
+        <table>
+            {{ form.gas_per_kWh.label.text }}
+            {{ form.gas_per_kWh(size=20, value=0.05) }}
+            {% if form.gas_per_kWh.errors %}
+            <ul class=errors>
+                {% for error in form.gas_per_kWh.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+        </table>
+        <table>
+            {{ form.standing_charge_per_day.label.text }}
+            {{ form.standing_charge_per_day(size=20, value=0.10) }}
+            {% if form.standing_charge_per_day.errors %}
+            <ul class=errors>
+                {% for error in form.standing_charge_per_day.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+        </table>
+        <table>
+            <tr>
+                <td>{{ form.submit() }}</td>
+            </tr>
+        </table>
+    </form>
+
+
+</body>
+
+</html>

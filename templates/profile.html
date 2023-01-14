@@ -6,6 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile page</title>
+
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
 
 <body>
@@ -17,8 +21,48 @@
     <p>EVC: {{ current_user.evc }}</p>
     <p>Energy Credit: {{ current_user.energy_credit }}</p>
     <p>Energy Bill: {{ current_user.energy_bill }}</p>
-    <a href="{{ url_for('logout') }}">Logout</a>
-    <a href="{{ url_for('submit_meter_reading') }}">Submit Meter Reading</a>
+
+    <!-- make a div which has layout of flex and flex-direction: column with bootstrap -->
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+
+                        <a href="{{ url_for('logout') }}">Logout</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="{{ url_for('submit_meter_reading') }}">Submit Meter Reading</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="{{ url_for('view_latest_bill') }}">View Latest Bill</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- view_lastest_bill -->
+
 
 </body>
 

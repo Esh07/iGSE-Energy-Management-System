@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, request, flash, jsonify, get_flashed_messages, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, FloatField, DateField, validators, SelectField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, FloatField, DateField, validators, SelectField, FormField, FieldList, Form, DecimalField
 from wtforms.validators import Email, DataRequired, Length, EqualTo, NumberRange
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, LoginManager, login_user, login_required, logout_user, current_user
@@ -55,7 +55,7 @@ class EnergyConsumption(db.Model):
 
 
 class User(UserMixin, db.Model):
-    print("User class")
+    __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(100), unique=True)
     password_hash = db.Column(db.String(150))
@@ -66,6 +66,8 @@ class User(UserMixin, db.Model):
     evc = db.Column(db.Integer, db.ForeignKey('evc.id'))
     energy_credit = db.Column(db.Float, default=200)
     joined_on = db.Column(db.DateTime, default=datetime.utcnow)
+    bills = db.relationship('Bill', backref='users', lazy=True)
+    is_admin = db.Column(db.Boolean, default=False)
 
     def __init__(self, email, password, address, property_type, num_bedrooms, evc):
         self.email = email
@@ -75,6 +77,7 @@ class User(UserMixin, db.Model):
         self.num_bedrooms = num_bedrooms
         self.evc = evc
         self.energy_credit = 200
+        self.is_admin = False
 
     def __repr__(self):
         return f'{self.email}'
@@ -92,22 +95,6 @@ class User(UserMixin, db.Model):
             self.energy_credit += 200
         return True
 
-    def calculate_bill(self, current_reading, previous_reading, tariff_info):
-        # calculate number of units used
-        units_used = {
-            'electricity_day': current_reading['electricity_day'] - previous_reading['electricity_day'],
-            'electricity_night': current_reading['electricity_night'] - previous_reading['electricity_night'],
-            'gas': current_reading['gas'] - previous_reading['gas']
-        }
-
-        # calculate bill
-        bill = (units_used['electricity_day'] * tariff_info['electricity_day_per_kWh']) + \
-            (units_used['electricity_night'] * tariff_info['electricity_night_per_kWh']) + \
-            (units_used['gas'] * tariff_info['gas_per_kWh']) + \
-            (tariff_info['standing_charge_per_day'] * 30)
-
-        return bill
-
     def to_dict(self):
         return {
             'id': self.id,
@@ -118,6 +105,36 @@ class User(UserMixin, db.Model):
             'evc': self.evc,
             'energy_credit': self.energy_credit
         }
+
+
+class Admin(User):
+    __tablename__ = 'admin'
+    id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
+
+    def __init__(self, email, password, address=None, property_type=None, num_bedrooms=None, evc=None):
+        super().__init__(email, password, address, property_type, num_bedrooms, evc)
+        self.is_admin = True
+
+    def set_tariffs(self, electricity_day_per_kWh, electricity_night_per_kWh, gas_per_kWh, standing_charge_per_day):
+        tariffs = Tariff.query.first()
+        if tariffs:
+            tariffs.electricity_day_per_kWh = electricity_day_per_kWh
+            tariffs.electricity_night_per_kWh = electricity_night_per_kWh
+            tariffs.gas_per_kWh = gas_per_kWh
+            tariffs.standing_charge_per_day = standing_charge_per_day
+        else:
+            tariffs = Tariff(electricity_day_per_kWh=electricity_day_per_kWh, electricity_night_per_kWh=electricity_night_per_kWh,
+                             gas_per_kWh=gas_per_kWh, standing_charge_per_day=standing_charge_per_day)
+            db.session.add(tariffs)
+        db.session.commit()
+
+    def view_meter_readings(self):
+        meter_readings = MeterReading.query.all()
+        return meter_readings
+
+    def view_energy_statistics(self):
+        # code to calculate average gas and electricity consumption
+        pass
 
 
 class EVC(db.Model):
@@ -202,7 +219,10 @@ class MeterReading(db.Model):
 
 class Bill(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    customer_id = db.Column(db.Integer, nullable=False)
+    # customer_id = db.Column(db.Integer, nullable=False)
+    customer_id = db.Column(
+        db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user = db.relationship("User", back_populates="bills")
     start_date = db.Column(db.Date, nullable=False)
     end_date = db.Column(db.Date, nullable=False)
     electricity_day_reading = db.Column(db.Float, nullable=False)
@@ -331,6 +351,19 @@ class Bill(db.Model):
         flash('Bill created successfully')
         return redirect(url_for('view_latest_bill'))
 
+# ==========---------- Tarric Form class ----------==========
+
+
+class TariffForm(FlaskForm):
+    electricity_day_per_kWh = DecimalField(
+        'Electricity Day per kWh', validators=[DataRequired()])
+    electricity_night_per_kWh = DecimalField(
+        'Electricity Night per kWh', validators=[DataRequired()])
+    gas_per_kWh = DecimalField('Gas per kWh', validators=[DataRequired()])
+    standing_charge_per_day = DecimalField(
+        'Standing Charge per day', validators=[DataRequired()])
+    submit = SubmitField('Submit')
+
 
 class MeterReadingForm(FlaskForm):
     # date = DateField('Submission date', validators=[DataRequired()])
@@ -370,6 +403,18 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Login')
 
 
+class AdminRegisterForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField('Sign Up')
+
+
+class AdminLoginForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField('Login')
+
+
 class TopUpForm(FlaskForm):
     # my toekn is a string of 8 digits
     evc = StringField('evc', validators=[
@@ -399,6 +444,7 @@ def register():
                 # render the error saying the email already exists
                 form.email.errors.append("Email address already exists")
                 flash('Email address already exists')
+                return render_template('register.html', form=form)
         except:
             pass
         try:
@@ -634,6 +680,128 @@ def top_up():
         session.message = "Top up successful"
         return redirect(url_for('index'))
     return render_template('top_up.html', form=form)
+
+
+# =============------------- Admin Page -----------------==================
+@app.route('/admin/register', methods=['GET', 'POST'])
+def admin_register():
+    messages = get_flashed_messages()
+    form = AdminRegisterForm()
+    if form.validate_on_submit():
+        email = form.email.data
+        password = form.password.data
+        if email != "gse@shangrila.gov.un":
+            flash('Invalid admin email. I will update with default admin email')
+            email = "gse@shangrila.gov.un"
+        if password != "gse@energy":
+            flash('Invalid password. I am updating with default password')
+            password = "gse@energy"
+        if Admin.query.filter_by(email=email).first():
+            flash('Admin account already exists')
+            return redirect(url_for('admin_login'))
+        admin = Admin(email=email, password=password)
+        admin.set_password(password)
+        db.session.add(admin)
+        db.session.commit()
+        flash('You are now a registered admin!')
+        return redirect(url_for('admin_dashboard'))
+    return render_template('admin_register.html', form=form, messages=messages)
+
+
+@app.route('/admin/login', methods=['GET', 'POST'])
+def admin_login():
+    messages = get_flashed_messages()
+    form = AdminLoginForm()
+    print(form, "messages")
+    # print all data from form
+    print(form.email.data, "email")
+    print(form.password.data, "password")
+    if form.validate_on_submit():
+        email = form.email.data
+        password = form.password.data
+        admin = Admin.query.filter_by(email=email).first()
+        if admin is None:
+            flash(
+                f'This {email} is not registered as an admin. Please register first.')
+            return redirect(url_for('admin_register'))
+        if admin and admin.check_password(password):
+            login_user(admin)
+            flash('You are now logged in as admin.')
+            print('You are now logged in as admin.')
+            return redirect(url_for('admin_dashboard'))
+        else:
+            flash('Invalid email or password.')
+    return render_template('admin_login.html', form=form, messages=messages)
+
+
+@ app.route('/admin')
+def admin_dashboard():
+    messages = get_flashed_messages()
+    print("checking if admin is logged in")
+    if current_user.is_authenticated and current_user.is_admin:
+        print('You are now logged in as admin.')
+        return render_template('admin_dashboard.html', messages=messages)
+    else:
+        flash('You need to login as an admin first.')
+        return redirect(url_for('admin_login', messages=messages))
+
+
+@ app.route('/admin/set-tariffs', methods=['GET', 'POST'])
+@ login_required
+def set_tariffs():
+    if not current_user.is_admin:
+        flash('You must be an admin to access this page.')
+        return redirect(url_for('index'))
+    form = TariffForm()
+    if form.validate_on_submit():
+        electricity_day_per_kWh = form.electricity_day_per_kWh.data
+        electricity_night_per_kWh = form.electricity_night_per_kWh.data
+        gas_per_kWh = form.gas_per_kWh.data
+        standing_charge_per_day = form.standing_charge_per_day.data
+        tariffs = Tariff.query.first()
+        if tariffs:
+            tariffs.electricity_day_per_kWh = electricity_day_per_kWh
+            tariffs.electricity_night_per_kWh = electricity_night_per_kWh
+            tariffs.gas_per_kWh = gas_per_kWh
+            tariffs.standing_charge_per_day = standing_charge_per_day
+        else:
+            tariffs = Tariff(electricity_day_per_kWh=electricity_day_per_kWh,
+                             electricity_night_per_kWh=electricity_night_per_kWh,
+                             gas_per_kWh=gas_per_kWh,
+                             standing_charge_per_day=standing_charge_per_day)
+            db.session.add(tariffs)
+        db.session.commit()
+        flash('Tariffs set successfully')
+        return redirect(url_for('admin_dashboard'))
+    return render_template('set_tariffs.html', form=form)
+
+
+@app.route('/admin/bills')
+@login_required
+def admin_view_bills():
+    if not current_user.is_admin:
+        flash('You must be an admin to access this page.')
+        return redirect(url_for('index'))
+
+    # check if there is parameter in url
+    if request.args.get('bill_id'):
+        bill_id = request.args.get('bill_id')
+        bill = Bill.query.get_or_404(bill_id)
+        return render_template('admin_view_bill.html', bill=bill)
+    bills = Bill.query.all()
+    return render_template('admin_view_bills.html', bills=bills)
+
+# get the specific bill
+
+
+@app.route('/admin/bills/<int:bill_id>')
+@login_required
+def admin_view_bill(bill_id):
+    if not current_user.is_admin:
+        flash('You must be an admin to access this page.')
+        return redirect(url_for('index'))
+    bill = Bill.query.get_or_404(bill_id)
+    return render_template('admin_view_bill.html', bill=bill)
 
 
 if __name__ == '__main__':
