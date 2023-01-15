@@ -433,6 +433,8 @@ Thumbs.db:encryptable
 ehthumbs.db
 ehthumbs_vista.db
 
+/iGES_Open_Data_REST_API/api-env
+
 # Dump file
 *.stackdump
 
