@@ -816,34 +816,37 @@ def top_up():
 # =============------------- Admin Page -----------------==================
 @ app.route('/admin/register', methods=['GET', 'POST'])
 def admin_register():
-    if current_user.is_authenticated:
-        if current_user.is_admin:
-            messages = get_flashed_messages()
-            form = AdminRegisterForm()
-            if form.validate_on_submit():
-                email = form.email.data
-                password = form.password.data
-                if email != "gse@shangrila.gov.un":
-                    flash('Invalid admin email. I will update with default admin email')
-                    email = "gse@shangrila.gov.un"
-                if password != "gse@energy":
-                    flash('Invalid password. I am updating with default password')
-                    password = "gse@energy"
-                if Admin.query.filter_by(email=email).first():
-                    flash('Admin account already exists')
-                    return redirect(url_for('admin_login'))
-                admin = Admin(email=email, password=password)
-                admin.set_password(password)
-                db.session.add(admin)
-                db.session.commit()
-                flash('You are now a registered admin!')
-                return redirect(url_for('admin_dashboard'))
-        else:
-            flash('You are not an admin')
-            return redirect(url_for('index'))
+    messages = get_flashed_messages()
+    print("Admin register")
+    # if current_user.is_authenticated:
+    #     print("User is authenticated")
+    #     flash("You are already logged in")
+    #     return redirect(url_for('admin_dashboard'))
+
+    form = AdminRegisterForm()
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            print("Form is validated")
+            email = form.email.data
+            password = form.password.data
+            if email != "gse@shangrila.gov.un":
+                flash('Invalid admin email. I will update with default admin email')
+                email = "gse@shangrila.gov.un"
+            if password != "gse@energy":
+                flash('Invalid password. I am updating with default password')
+                password = "gse@energy"
+            if Admin.query.filter_by(email=email).first():
+                flash('Admin account already exists')
+                return redirect(url_for('admin_login'))
+            admin = Admin(email=email, password=password)
+            admin.set_password(password)
+            db.session.add(admin)
+            db.session.commit()
+            flash('You are now a registered admin!')
+            return redirect(url_for('admin_dashboard'))
     else:
-        flash("You are not logged in")
-        return redirect(url_for('admin_login'))
+        print("Form is not validated")
+        return render_template('admin_register.html', form=form, messages=messages)
     return render_template('admin_register.html', form=form, messages=messages)
 
 

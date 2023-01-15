@@ -1,40 +1,39 @@
-<!DOCTYPE html>
-<html>
+{% extends "master.html" %}
 
-<head>
-    <title>Admin Registration</title>
-</head>
+{% block title %}Admin Registration{% endblock %}
 
-<body>
-    <h1>Admin Registration</h1>
+{% block body %}
 
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul class=flashes>
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1 class="text-center my-5">Admin Registration</h1>
 
-    <form method="POST" action="{{ url_for('admin_register') }}">
-        {{ form.hidden_tag() }}
-        <label for="username">Username:</label>
-        {{ form.email }}
-        <br>
-        <label for="password">Password:</label>
-        {{ form.password }}
-        <br>
-        <label for="confirm_password">Confirm Password:</label>
-        {{ form.confirm_password }}
-        <br>
-        <input type="submit" value="Register">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="alert alert-danger">
+                {% for message in messages %}
+                {{ message }}<br>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
 
-    </form>
-    {% for message in messages %}
-    <p>{{ message }}</p>
-    {% endfor %}
-</body>
+            <form method="POST" action="{{ url_for('admin_register') }}">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    {{ form.email(class="form-control") }}
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    {{ form.password(class="form-control") }}
+                </div>
+                {{ form.submit(class="btn btn-primary")}}
 
-</html>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
