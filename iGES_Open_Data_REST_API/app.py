@@ -430,66 +430,129 @@ class TopUpForm(FlaskForm):
 
 @ app.route('/register', methods=['GET', 'POST'])
 def register():
-    form = RegisterForm()
-    print(form.errors)
-    print(form.data)
-    print(form)
-    print("Register page")
-    if form.validate_on_submit():
-        email = form.email.data
-        password = form.password.data
-        address = form.address.data
-        property_type = form.property_type.data
-        num_bedrooms = int(form.num_bedrooms.data)
-        evc = form.evc.data
-        print("Form validated")
-        try:
+    # // i will make ajax call to this route
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        form = RegisterForm()
+        print("ajax call")
+        # print form with tokens
+        print(form.csrf_token)
+        # print all form
+        print(form.data)
+        if not form.validate():
+            return jsonify(success=False, email_error=form.email.errors, password_error=form.password.errors,
+                           confirm_password_error=form.confirm_password.errors, address_error=form.address.errors,
+                           property_type_error=form.property_type.errors, num_bedrooms_error=form.num_bedrooms.errors,
+                           evc_error=form.evc.errors)
+
+        if form.validate_on_submit():
+            print("form validated")
+            email = request.form.get('email')
             user = User.query.filter_by(email=email).first()
-            print("User found 1")
             if user:
-                # render the error saying the email already exists
-                form.email.errors.append("Email address already exists")
-                flash('Email address already exists')
-                return render_template('register.html', form=form)
-        except:
-            pass
-        try:
-            user = User.query.filter_by(evc=evc).first()
-            if request.form['evc'] not in valid_evc_codes:
-                form.evc.errors.append("Invalid EVC voucher code")
-                flash('Invalid EVC')
-                return render_template('register.html', form=form)
-        except:
-            pass
+                return jsonify({'status': 'error', 'message': 'Email address already exists'})
+            else:
+                return jsonify({'status': 'success', 'message': 'Email address is available'})
 
-        evc_code = EVC.query.filter_by(evc=evc).first()
-        if evc_code:
-            form.evc.errors.append("EVC code already used")
-            flash('EVC code already used')
-            return render_template('register.html', form=form)
+            password = request.form.get('password')
+            confirm_password = request.form.get('confirm_password')
+            print("password", password)
+            print("confirm_password", confirm_password)
+            if password != confirm_password:
+                return jsonify({'status': 'error', 'message': 'Passwords do not match'})
 
-        new_evc_code = EVC(evc=evc)
-        db.session.add(new_evc_code)
-        db.session.commit()
-        user = User(email=email, password=password, address=address,
-                    property_type=property_type, num_bedrooms=num_bedrooms, evc=new_evc_code.id)
-        user.set_password(password)
+            address = request.form.get('address')
+            property_type = request.form.get('property_type')
+            num_bedrooms = request.form.get('num_bedrooms')
+            if not num_bedrooms.isdigit():
+                return jsonify({'status': 'error', 'message': 'Number of bedrooms must be an integer.'})
+            evc = request.form.get('evc')
+            if evc not in valid_evc_codes:
+                return jsonify({'status': 'error', 'message': 'Invalid energy voucher code.'})
 
-        try:
-            db.session.add(user)
+            evc_code = EVCCode.query.filter_by(code=evc).first()
+            if evc_code:
+                return jsonify({'status': 'error', 'message': 'Energy voucher code has already been used.'})
+
+            new_evc_code = EVC(evc=evc)
+            db.session.add(new_evc_code)
             db.session.commit()
-            flash('User created successfully')
-            return redirect(url_for('login'))
-        except IntegrityError as e:
-            form.email.errors.append("Email address already exists")
-            db.session.rollback()
-            return render_template('register.html', form=form)
+            user = User(email=email, password=password, address=address,
+                        property_type=property_type, num_bedrooms=num_bedrooms, evc=new_evc_code.id)
+            user.set_password(password)
+            try:
+                db.session.add(user)
+                db.session.commit()
+                flash('User created successfully')
+                return redirect(url_for('login'))
+            except IntegrityError as e:
+                db.session.rollback()
+                return jsonify({'status': 'error', 'message': 'Email address already exists'})
+        else:
+            return jsonify({'status': 'error', 'message': 'Form not validated'})
+        # // get evc code from db and check if it exists
+        # // if it exists, check if it has been use
     else:
-        # // print out the errors
+
+        form = RegisterForm()
         print(form.errors)
-        print(form.errors.items())
-        logging.debug(f'Form not valid')
-        print("Form not valid - else clause")
+        print(form.data)
+        print(form)
+        print("Register page")
+        if form.validate_on_submit():
+            email = form.email.data
+            password = form.password.data
+            address = form.address.data
+            property_type = form.property_type.data
+            num_bedrooms = int(form.num_bedrooms.data)
+            evc = form.evc.data
+            print("Form validated")
+            try:
+                user = User.query.filter_by(email=email).first()
+                print("User found 1")
+                if user:
+                    # render the error saying the email already exists
+                    form.email.errors.append("Email address already exists")
+                    flash('Email address already exists')
+                    return render_template('register.html', form=form)
+            except:
+                pass
+            try:
+                user = User.query.filter_by(evc=evc).first()
+                if request.form['evc'] not in valid_evc_codes:
+                    form.evc.errors.append("Invalid EVC voucher code")
+                    flash('Invalid EVC')
+                    return render_template('register.html', form=form)
+            except:
+                pass
+
+            evc_code = EVC.query.filter_by(evc=evc).first()
+            if evc_code:
+                form.evc.errors.append("EVC code already used")
+                flash('EVC code already used')
+                return render_template('register.html', form=form)
+
+            new_evc_code = EVC(evc=evc)
+            db.session.add(new_evc_code)
+            db.session.commit()
+            user = User(email=email, password=password, address=address,
+                        property_type=property_type, num_bedrooms=num_bedrooms, evc=new_evc_code.id)
+            user.set_password(password)
+
+            try:
+                db.session.add(user)
+                db.session.commit()
+                flash('User created successfully')
+                return redirect(url_for('login', type='success'))
+            except IntegrityError as e:
+                form.email.errors.append("Email address already exists")
+                db.session.rollback()
+                return render_template('register.html', form=form)
+        else:
+            # // print out the errors
+            print(form.errors)
+            print(form.errors.items())
+            logging.debug(f'Form not valid')
+            print("Form not valid - else clause")
     # return the form with the errors and bound data
     return render_template('register.html', form=form)
 
@@ -503,31 +566,70 @@ def login():
         user = User.query.filter_by(email=email).first()
         if user is not None and user.check_password(password):
             login_user(user)
-            next_page = request.args.get('next')
+            # forward user to the profile page
+            next_page = request.args.get('profile')
             session['user'] = json.dumps(user.to_dict())
+            # rendder template with current_user
             flash("You are logged in!")
             # rendder template with current_user
-            return redirect(next_page or url_for('profile'))
+            return redirect(url_for('profile'))
+
         if user is None:
             flash("User does not exist")
             form.email.errors.append("User does not exist")
+            return render_template('login.html', form=form, type='danger')
         if user is not None and not user.check_password(password):
             flash("Incorrect password")
             form.password.errors.append("Incorrect password")
+            return render_template('login.html', form=form, type='danger')
+        return render_template('login.html', form=form)
     return render_template('login.html', form=form)
+
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        # Request is an AJAX request
+        email = form.email.data
+        password = form.password.data
+        user = User.query.filter_by(email=email).first()
+        if user is not None and user.check_password(password):
+            login_user(user)
+            # forward user to the profile page
+            session['user'] = json.dumps(user.to_dict())
+            # rendder template with current_user
+            flash("You are logged in!")
+            # rendder template with current_user
+        if user is None:
+            flash("User does not exist")
+            form.email.errors.append("User does not exist")
+            return jsonify(success=False, message='User does not exist', type='danger')
+
+        if user is not None and not user.check_password(password):
+            flash("Incorrect password")
+            form.password.errors.append("Incorrect password")
+            return jsonify(success=False, message='Invalid email or password', type='danger')
+        return jsonify(success=False, message='Invalid email or password', type='danger')
+    return redirect(url_for('profile'))
 
 
 @ app.route('/profile')
 @ login_required
 def profile():
-    user = json.loads(session['user'])
+    if current_user.is_authenticated:
+        user = json.loads(session['user'])
+    else:
+        flash("You are not logged in")
+        return redirect(url_for('login'))
     return render_template('profile.html', user=user)
 
 
 @ app.route('/logout')
 def logout():
-    session.pop('user_id', None)
-    flash("You are logged out!")
+    if current_user.is_authenticated:
+        logout_user()
+        session.pop('user_id', None)
+        flash("You are logged out!")
+    else:
+        flash("You are not logged in")
+        return redirect(url_for('index'))
     return redirect(url_for('index'))
 
 
@@ -537,122 +639,144 @@ def logout():
 
 @ app.route('/home', methods=['GET'])
 def index():
+    # get flash messages
     messages = get_flashed_messages()
+    if current_user.is_authenticated:
+        return redirect(url_for('profile'))
+
     return render_template('index.html', messages=messages)
 
 
 @ app.route('/')
 def root():
-    print("/")
+    if current_user.is_authenticated:
+        return redirect(url_for('profile'))
     return redirect(url_for('index'))
 
 
 @ app.route('/submit-meter-reading', methods=['GET', 'POST'])
 @ login_required
 def submit_meter_reading():
-    form = MeterReadingForm()
-    print(form.errors)
-    print(form.data)
-    print(form)
-    if form.validate_on_submit():
-        date = form.date.data
-        electricity_day = form.electricity_day.data
-        electricity_night = form.electricity_night.data
-        gas = form.gas.data
-        # get the current user id
-        user_id = current_user.id
-        meter_reading = MeterReading(customer_id=user_id, date=date, electricity_day=electricity_day,
-                                     electricity_night=electricity_night, gas=gas)
-        try:
-            db.session.add(meter_reading)
-            db.session.commit()
-            print("Meter reading added")
-            flash('Meter readings submitted successfully')
-            # call the function to calculate the meter readings
-            # Retrieve the latest and previous meter readings
-
-            latest_reading = MeterReading.query.filter_by(
-                customer_id=user_id, date=date).first()
-            previous_reading = MeterReading.query.filter(
-                MeterReading.customer_id == user_id, MeterReading.date < date).order_by(MeterReading.date.desc()).first()
-            if previous_reading:
-                # Calculate the energy consumption
-                # Create a new bill
-                Bill.create_bill(user_id, date)
-
-                flash('Bill created successfully')
-                return redirect(url_for('view_latest_bill'))
-            else:
-                flash('No previous meter readings found')
-                return redirect(url_for('index'))
-        except IntegrityError as e:
-            print("Meter reading not added")
-            db.session.rollback()
-            return render_template('submit_meter_reading.html', form=form)
-        # Your code to save the meter readings to the database
-        flash('Meter readings submitted successfully')
-        return redirect(url_for('profile'))
-    else:
+    if current_user.is_authenticated:
+        form = MeterReadingForm()
         print(form.errors)
-        print(form.errors.items())
-        logging.debug(f'Form not valid')
-        print("Form not valid - else clause")
+        print(form.data)
+        print(form)
+        if form.validate_on_submit():
+            date = form.date.data
+            electricity_day = form.electricity_day.data
+            electricity_night = form.electricity_night.data
+            gas = form.gas.data
+            # get the current user id
+            user_id = current_user.id
+            meter_reading = MeterReading(customer_id=user_id, date=date, electricity_day=electricity_day,
+                                         electricity_night=electricity_night, gas=gas)
+            try:
+                db.session.add(meter_reading)
+                db.session.commit()
+                print("Meter reading added")
+                flash('Meter readings submitted successfully')
+                # call the function to calculate the meter readings
+                # Retrieve the latest and previous meter readings
+
+                latest_reading = MeterReading.query.filter_by(
+                    customer_id=user_id, date=date).first()
+                previous_reading = MeterReading.query.filter(
+                    MeterReading.customer_id == user_id, MeterReading.date < date).order_by(MeterReading.date.desc()).first()
+                if previous_reading:
+                    # Calculate the energy consumption
+                    # Create a new bill
+                    Bill.create_bill(user_id, date)
+
+                    flash('Bill created successfully')
+                    return redirect(url_for('view_latest_bill'))
+                else:
+                    flash('No previous meter readings found')
+                    return redirect(url_for('index'))
+            except IntegrityError as e:
+                print("Meter reading not added")
+                db.session.rollback()
+                return render_template('submit_meter_reading.html', form=form)
+            # Your code to save the meter readings to the database
+            flash('Meter readings submitted successfully')
+            return redirect(url_for('profile'))
+        else:
+            print(form.errors)
+            print(form.errors.items())
+            logging.debug(f'Form not valid')
+            print("Form not valid - else clause")
+    else:
+        flash("You are not logged in")
+        return redirect(url_for('login'))
     return render_template('submit_meter_reading.html', form=form)
 
 
 @ app.route('/energy-consumption', methods=['GET'])
 def get_energy_consumption():
-    customer_id = request.args.get('customer_id')
-    start_date = request.args.get('start_date')
-    end_date = request.args.get('end_date')
-    query = EnergyConsumption.query
-    if customer_id:
-        query = query.filter(EnergyConsumption.customer_id == customer_id)
-    if start_date:
-        query = query.filter(EnergyConsumption.date >= start_date)
-    if end_date:
-        query = query.filter(EnergyConsumption.date <= end_date)
-    energy_consumption = query.all()
+    if current_user.is_authenticated:
+        customer_id = request.args.get('customer_id')
+        start_date = request.args.get('start_date')
+        end_date = request.args.get('end_date')
+        query = EnergyConsumption.query
+        if customer_id:
+            query = query.filter(EnergyConsumption.customer_id == customer_id)
+        if start_date:
+            query = query.filter(EnergyConsumption.date >= start_date)
+        if end_date:
+            query = query.filter(EnergyConsumption.date <= end_date)
+        energy_consumption = query.all()
+    else:
+        flash("You are not logged in")
+        return redirect(url_for('login'))
     return jsonify([energy_consumption.to_dict() for energy_consumption in energy_consumption])
 
 
 @ app.route('/view_latest_bill')
 @ login_required
 def view_latest_bill():
-    messages = get_flashed_messages()
-    latest_bill = Bill.query.filter_by(
-        customer_id=current_user.id, is_paid=False).first()
+    if current_user.is_authenticated:
+        messages = get_flashed_messages()
+        latest_bill = Bill.query.filter_by(
+            customer_id=current_user.id, is_paid=False).first()
 
-    print(latest_bill)
-    if latest_bill:
-        return render_template('view_bill.html', bill=latest_bill, messages=messages)
+        print(latest_bill)
+        if latest_bill:
+            return render_template('view_bill.html', bill=latest_bill, messages=messages)
+        else:
+            flash('No unpaid bills found.')
+            return redirect(url_for('index'))
     else:
-        flash('No unpaid bills found.')
-        return redirect(url_for('index'))
+        flash("You are not logged in")
+        return redirect(url_for('login'))
+    return render_template('view_bill.html', bill=latest_bill, messages=messages)
 
 
 @ app.route('/pay_bill/<int:bill_id>')
 @ login_required
 def pay_bill(bill_id):
-    bill = Bill.query.filter_by(id=bill_id).first()
-    if not bill:
-        flash('Bill not found', 'danger')
-        return redirect(url_for('view_latest_bill'))
-    if bill.customer_id != current_user.id:
-        flash('Unauthorized access', 'danger')
-        return redirect(url_for('view_latest_bill'))
-    if bill.is_paid:
-        flash('Bill already paid', 'info')
-        return redirect(url_for('view_latest_bill'))
+    if current_user.is_authenticated:
+        bill = Bill.query.filter_by(id=bill_id).first()
+        if not bill:
+            flash('Bill not found', 'danger')
+            return redirect(url_for('view_latest_bill'))
+        if bill.customer_id != current_user.id:
+            flash('Unauthorized access', 'danger')
+            return redirect(url_for('view_latest_bill'))
+        if bill.is_paid:
+            flash('Bill already paid', 'info')
+            return redirect(url_for('view_latest_bill'))
 
-    if current_user.energy_credit < bill.bill_amount:
-        flash('Not enough credit to pay the bill', 'danger')
-        return redirect(url_for('view_latest_bill'))
-    current_user.energy_credit -= bill.bill_amount
-    bill.is_paid = True
-    bill.paid_at = datetime.utcnow()
-    db.session.commit()
-    flash('Bill paid successfully', 'success')
+        if current_user.energy_credit < bill.bill_amount:
+            flash('Not enough credit to pay the bill', 'danger')
+            return redirect(url_for('view_latest_bill'))
+        current_user.energy_credit -= bill.bill_amount
+        bill.is_paid = True
+        bill.paid_at = datetime.utcnow()
+        db.session.commit()
+        flash('Bill paid successfully', 'success')
+    else:
+        flash("You are not logged in")
+        return redirect(url_for('login'))
     return redirect(url_for('view_latest_bill'))
 
 
@@ -660,62 +784,81 @@ def pay_bill(bill_id):
 @ app.route('/top-up', methods=['GET', 'POST'])
 @ login_required
 def top_up():
-    form = TopUpForm()
-    if form.validate_on_submit():
-        current_voucher = form.evc.data
-        if current_voucher not in valid_evc_codes:
-            form.evc.errors.append("Invalid EVC voucher code")
-            flash('Invalid EVC')
-            return render_template('top_up.html', form=form)
-        # check if voucher is valid
-        all_vouchers = EVC.query.all()
-        voucher = EVC.query.filter_by(evc=current_voucher).first()
-        if voucher:
-            flash('Invalid voucher', 'danger')
-            form.evc.errors.append('Invalid voucher - already used')
-            return render_template('top_up.html', form=form)
+    if current_user.is_authenticated:
+        form = TopUpForm()
+        if form.validate_on_submit():
+            current_voucher = form.evc.data
 
-        new_evc_code = EVC(evc=current_voucher)
-        db.session.add(new_evc_code)
-        db.session.commit()
-        # add credit to user
-        current_user.energy_credit += new_evc_code.credit
-        db.session.commit()
-        flash('Top up successful', 'success')
-        # send success text
-        session.message = "Top up successful"
-        return redirect(url_for('index'))
+            if current_voucher not in valid_evc_codes:
+                form.evc.errors.append("Invalid EVC voucher code")
+                flash('Invalid EVC')
+                return render_template('top_up.html', form=form)
+            # check if voucher is valid
+            all_vouchers = EVC.query.all()
+            voucher = EVC.query.filter_by(evc=current_voucher).first()
+            if voucher:
+                flash('Invalid voucher', 'danger')
+                form.evc.errors.append('Invalid voucher - already used')
+                return render_template('top_up.html', form=form)
+
+            new_evc_code = EVC(evc=current_voucher)
+            db.session.add(new_evc_code)
+            db.session.commit()
+            # add credit to user
+            current_user.energy_credit += new_evc_code.credit
+            db.session.commit()
+            flash('Top up successful', 'success')
+            # send success text
+            session.message = "Top up successful"
+            return redirect(url_for('index'))
+    else:
+        flash("You are not logged in")
+        return redirect(url_for('login'))
     return render_template('top_up.html', form=form)
 
 
 # =============------------- Admin Page -----------------==================
-@app.route('/admin/register', methods=['GET', 'POST'])
+@ app.route('/admin/register', methods=['GET', 'POST'])
 def admin_register():
-    messages = get_flashed_messages()
-    form = AdminRegisterForm()
-    if form.validate_on_submit():
-        email = form.email.data
-        password = form.password.data
-        if email != "gse@shangrila.gov.un":
-            flash('Invalid admin email. I will update with default admin email')
-            email = "gse@shangrila.gov.un"
-        if password != "gse@energy":
-            flash('Invalid password. I am updating with default password')
-            password = "gse@energy"
-        if Admin.query.filter_by(email=email).first():
-            flash('Admin account already exists')
-            return redirect(url_for('admin_login'))
-        admin = Admin(email=email, password=password)
-        admin.set_password(password)
-        db.session.add(admin)
-        db.session.commit()
-        flash('You are now a registered admin!')
-        return redirect(url_for('admin_dashboard'))
+    if current_user.is_authenticated:
+        if current_user.is_admin:
+            messages = get_flashed_messages()
+            form = AdminRegisterForm()
+            if form.validate_on_submit():
+                email = form.email.data
+                password = form.password.data
+                if email != "gse@shangrila.gov.un":
+                    flash('Invalid admin email. I will update with default admin email')
+                    email = "gse@shangrila.gov.un"
+                if password != "gse@energy":
+                    flash('Invalid password. I am updating with default password')
+                    password = "gse@energy"
+                if Admin.query.filter_by(email=email).first():
+                    flash('Admin account already exists')
+                    return redirect(url_for('admin_login'))
+                admin = Admin(email=email, password=password)
+                admin.set_password(password)
+                db.session.add(admin)
+                db.session.commit()
+                flash('You are now a registered admin!')
+                return redirect(url_for('admin_dashboard'))
+        else:
+            flash('You are not an admin')
+            return redirect(url_for('index'))
+    else:
+        flash("You are not logged in")
+        return redirect(url_for('admin_login'))
     return render_template('admin_register.html', form=form, messages=messages)
 
 
-@app.route('/admin/login', methods=['GET', 'POST'])
+@ app.route('/admin/login', methods=['GET', 'POST'])
 def admin_login():
+    # if current_user.is_admin:
+    #     return redirect(url_for('admin_dashboard'))
+    # else:
+    #     flash('You are not an admin')
+    #     return redirect(url_for('index'))
+
     messages = get_flashed_messages()
     form = AdminLoginForm()
     print(form, "messages")
@@ -742,6 +885,12 @@ def admin_login():
 
 @ app.route('/admin')
 def admin_dashboard():
+    if not current_user.is_authenticated:
+        flash('You must be logged in to access this page.')
+        return redirect(url_for('admin_login'))
+    if not current_user.is_admin:
+        flash('You must be an admin to access this page.')
+        return redirect(url_for('index'))
     messages = get_flashed_messages()
     print("checking if admin is logged in")
     if current_user.is_authenticated and current_user.is_admin:
@@ -751,10 +900,25 @@ def admin_dashboard():
         flash('You need to login as an admin first.')
         return redirect(url_for('admin_login', messages=messages))
 
+# admin logout
+
+
+@ app.route('/admin/logout')
+def admin_logout():
+    logout_user()
+    flash('You are now logged out.')
+    return redirect(url_for('index'))
+
 
 @ app.route('/admin/set-tariffs', methods=['GET', 'POST'])
 @ login_required
 def set_tariffs():
+    if not current_user.is_authenticated:
+        flash('You must be logged in to access this page.')
+        return redirect(url_for('admin_login'))
+    if not current_user.is_admin:
+
+        return redirect(url_for('index'))
     if not current_user.is_admin:
         flash('You must be an admin to access this page.')
         return redirect(url_for('index'))
@@ -782,9 +946,13 @@ def set_tariffs():
     return render_template('set_tariffs.html', form=form)
 
 
-@app.route('/admin/bills')
-@login_required
+@ app.route('/admin/bills')
+@ login_required
 def admin_view_bills():
+    if not current_user.is_authenticated:
+        flash('You must be logged in to access this page.')
+        return redirect(url_for('admin_login'))
+
     if not current_user.is_admin:
         flash('You must be an admin to access this page.')
         return redirect(url_for('index'))
@@ -800,9 +968,12 @@ def admin_view_bills():
 # get the specific bill
 
 
-@app.route('/admin/bills/<int:bill_id>')
-@login_required
+@ app.route('/admin/bills/<int:bill_id>')
+@ login_required
 def admin_view_bill(bill_id):
+    if not current_user.is_authenticated:
+        flash('You must be logged in to access this page.')
+        return redirect(url_for('admin_login'))
     if not current_user.is_admin:
         flash('You must be an admin to access this page.')
         return redirect(url_for('index'))
@@ -811,9 +982,12 @@ def admin_view_bill(bill_id):
 
 
 # view all submitted meter readings
-@app.route('/admin/meter-readings')
-@login_required
+@ app.route('/admin/meter-readings')
+@ login_required
 def admin_view_meter_readings():
+    if not current_user.is_authenticated:
+        flash('You must be logged in to access this page.')
+        return redirect(url_for('admin_login'))
     if not current_user.is_admin:
         flash('You must be an admin to access this page.')
         return redirect(url_for('index'))
@@ -823,9 +997,12 @@ def admin_view_meter_readings():
 # getting the  "Admin can view the energy statistics– show the average gas and electricity consumption (in kWh) per day for all customers based on their latest billing period."
 
 
-@app.route('/admin/energy-statistics')
-@login_required
+@ app.route('/admin/energy-statistics')
+@ login_required
 def admin_energy_statistics():
+    if not current_user.is_authenticated:
+        flash('You must be logged in to access this page.')
+        return redirect(url_for('admin_login'))
     if not current_user.is_admin:
         flash('You must be an admin to access this page.')
         return redirect(url_for('index'))
@@ -859,28 +1036,29 @@ def admin_energy_statistics():
 
 
 # ====------- Task 2 API -------====
-@app.route('/igse/propertycount', methods=['GET'])
+@ app.route('/igse/propertycount', methods=['GET'])
 def get_property_count():
-    print('get_property_count')
-    # Query the database to group properties by type and count the number of properties in each group
-    property_count = db.session.query(User.property_type, func.count(User.property_type)) \
-        .filter(User.property_type != None) \
-        .group_by(User.property_type) \
-        .all()
+    if request.method == 'GET':
+        print('get_property_count')
+        # Query the database to group properties by type and count the number of properties in each group
+        property_count = db.session.query(User.property_type, func.count(User.property_type)) \
+            .filter(User.property_type != None) \
+            .group_by(User.property_type) \
+            .all()
 
-    # Create a list to hold the property count data
-    data = []
+        # Create a list to hold the property count data
+        data = []
 
-    # Loop through the property count data and add it to the list in the desired format
-    for item in property_count:
-        data.append({item[0]: item[1]})
-        print(item[0])
+        # Loop through the property count data and add it to the list in the desired format
+        for item in property_count:
+            data.append({item[0]: item[1]})
+            print(item[0])
 
     # Return the data in JSON format
     return jsonify(data)
 
 
-@app.route("/igse/<property_type>/<num_bedrooms>")
+@ app.route("/igse/<property_type>/<num_bedrooms>")
 def energy_usage_stats(property_type, num_bedrooms):
     try:
         # Join the User and Bill tables and filter by property_type and num_bedrooms

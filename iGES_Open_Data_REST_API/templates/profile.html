@@ -1,71 +1,96 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile page</title>
-
-    <!-- bootstrap css -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-</head>
-
-<body>
-    <h1>Profile page</h1>
-    <p>Welcome, {{ current_user.email }}</p>
-    <p>Address: {{ current_user.address }}</p>
-    <p>Property Type: {{ current_user.property_type }}</p>
-    <p>Number of Bedrooms: {{ current_user.num_bedrooms }}</p>
-    <p>EVC: {{ current_user.evc }}</p>
-    <p>Energy Credit: {{ current_user.energy_credit }}</p>
-    <p>Energy Bill: {{ current_user.energy_bill }}</p>
-
-    <!-- make a div which has layout of flex and flex-direction: column with bootstrap -->
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-
-                        <a href="{{ url_for('logout') }}">Logout</a>
+{% extends "master.html" %}
+{% block title %}Profile{% endblock %}
+{% block body %}
+{% include "user_nav.html" %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8">
+            <div class="text-center">
+                <h1>Profile</h1>
+                <p>Welcome, {{ current_user.email }}</p>
+            </div>
+            <div class="card my-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12 col-md-4">
+                            <h5 class="card-title">Address:</h5>
+                        </div>
+                        <div class="col-12 col-md-8">
+                            <p class="card-text">{{ current_user.address }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-4">
+                            <h5 class="card-title">Property Type:</h5>
+                        </div>
+                        <div class="col-12 col" -md-8">
+                            <p class="card-text">{{ current_user.property_type }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-4">
+                            <h5 class="card-title">Number of Bedrooms:</h5>
+                        </div>
+                        <div class="col-12 col-md-8">
+                            <p class="card-text">{{ current_user.num_bedrooms }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-4">
+                            <h5 class="card-title">EVC:</h5>
+                        </div>
+                        <div class="col-12 col-md-8">
+                            <p class="card-text">{{ current_user.evc }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-4">
+                            <h5 class="card-title">Energy Credit:</h5>
+                        </div>
+                        <div class="col-12 col-md-8">
+                            <p class="card-text">{{ current_user.energy_credit }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-4">
+                            <h5 class="card-title">Energy Bill:</h5>
+                        </div>
+                        <div class="col-12 col-md-8">
+                            <p class="card-text">{{ current_user.energy_bill }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <a href="{{ url_for('submit_meter_reading') }}">Submit Meter Reading</a>
+            <div class="d-flex flex-row justify-content-between align-items-center">
+                <div class="card my-4">
+                    <div class="card-body text-center">
+                        <a href="{{ url_for('logout') }}" class="btn btn-danger text-nowrap">
+                            <i class=" fas fa-power-off"></i> Logout
+                        </a>
                     </div>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <a href="{{ url_for('view_latest_bill') }}">View Latest Bill</a>
+                <div class="card my-4">
+                    <div class="card-body text-center">
+                        <a href="{{ url_for('submit_meter_reading') }}" class="btn btn-primary text-nowrap">
+                            <i class="fas fa-tachometer-alt"></i> Submit Meter Reading
+                        </a>
                     </div>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <!-- # top up  -->
-                        <a href="{{ url_for('top_up') }}">Top Up</a>
+                <div class="card my-4">
+                    <div class="card-body text-center">
+                        <a href="{{ url_for('view_latest_bill') }}" class="btn btn-success text-nowrap">
+                            <i class="fas fa-file-invoice"></i> View Latest Bill
+                        </a>
                     </div>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
+                <div class="card my-4">
+                    <div class="card-body text-center">
+                        <a href="{{ url_for('top_up') }}" class="btn btn-warning text-nowrap">
+                            <i class="fas fa-wallet"></i> Top Up
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- view_lastest_bill -->
-
-
-</body>
-
-</html>
+    {% endblock %}

@@ -1,31 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "master.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Specific bill</title>
-</head>
+{% block title %}View Specific Bill{% endblock %}
 
-<body>
-    <h1>Bill Details</h1>
+{% block body %}
+
+{% include "admin_nav.html" %}
+
+<div class="container mt-5">
+    <h1 class="text-center">Bill Details</h1>
 
     {% with messages = get_flashed_messages() %}
     {% if messages %}
-    <ul class=flashes>
+    <div class="alert alert-danger mt-3" role="alert">
         {% for message in messages %}
-        <li>{{ message }}</li>
+        {{ message }}
         {% endfor %}
-    </ul>
+    </div>
     {% endif %}
     {% endwith %}
 
-    <a href="{{ url_for('admin_view_bills') }}">Back to all bills</a>
+    <a href="{{ url_for('admin_view_bills') }}" class="btn btn-secondary mt-3">Back to all bills</a>
 
-    <h2> {{ bill.user.email }} bill details</h2>
+    <h2 class="text-center mt-3"> {{ bill.user.email }} bill details</h2>
 
-    <table>
+    <table class="table mt-3">
         <thead>
             <tr>
                 <th>Bill Amount</th>
@@ -41,7 +39,5 @@
             </tr>
         </tbody>
     </table>
-
-</body>
-
-</html>
+</div>
+{% endblock %}

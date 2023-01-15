@@ -1,78 +1,162 @@
-<!DOCTYPE html>
-<html>
+{% extends "master.html" %}
+{% block title %}Registration{% endblock %}
+{% block head %}
+{% endblock %}
+{% block body %}
 
-<head>
-    <title>Registration</title>
-</head>
+{% include "user_nav.html" %}
 
-<body>
-    <h1>Registration</h1>
-    <form action="" method="POST">
+<div class="container my-5">
+    <h1 class="text-center">Registration</h1>
+    <p class="text-center">Enter your details to register.</p>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class="flashed-messages list-unstyled">
+        {% for message in messages %}
+        <li class="alert alert-danger">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+    <form action="{{ url_for('register') }}" method="post" class="mt-4 mx-auto d-flex gap-2 flex-column"
+        style="max-width: 400px;" id="RegistrationForm">
+
         {{ form.hidden_tag() }}
-        <div>
-            {{ form.email(placeholder="Enter your email", size=32) }}
-            <p>
-                {% for error in form.email.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-        </div>
-        <div>
-            {{ form.password(placeholder="Enter your password", size=32) }}
-            <p>
-                {% for error in form.password.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-        </div>
+        <div class="form-group">
+            <label for="email">Email address<spn class="text-danger">*</spn></label>
+            {{ form.email(placeholder="Enter your email", class="form-control", type="email", autofocus=True,
+            required=True) }}
+            <!-- <span id="email-error" class="text-danger"></span> -->
+            {% if form.email.errors %}
+            <span id="email-error" class="text-danger">{{ form.email.errors[0] }}</span>
+            {% endif %}
 
-        <div>
-            {{ form.confirm_password(placeholder="Confirm your password", size=32) }}
-            <p>
-                {% for error in form.confirm_password.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-        </div>
 
-        <div>
-            {{ form.address(placeholder="Enter your address", size=32) }}
-            <p>
-                {% for error in form.address.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
         </div>
+        <div class="form-group">
+            <label for="password">Password<spn class="text-danger">*</spn></label>
+            {{ form.password(placeholder="Enter your password", class="form-control", type="password", required=True) }}
+            <!-- <span id="password-error" class="text-danger"></span> -->
+            {% if form.password.errors %}
+            <span id="password-error" class="text-danger">{{ form.password.errors[0] }}</span>
+            {% endif %}
 
-        <div>
-            {{ form.property_type(placeholder="Enter your property type", size=32) }}
-            <p>
-                {% for error in form.property_type.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
         </div>
-        <div>
-            {{ form.num_bedrooms(placeholder="Enter your number of bedrooms", size=32) }}
-            <p>
-                {% for error in form.num_bedrooms.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-        </div>
-        <div>
-            {{ form.evc(placeholder="Energy Voucher Code", size=32) }}
-            <p>
-                {% for error in form.evc.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-        </div>
-        <div>
-            {{ form.submit() }}
-        </div>
+        <div class="form-group">
+            <label for="confirm_password">Confirm Password<spn class="text-danger">*</spn></label>
+            {{ form.confirm_password(placeholder="Confirm your password", class="form-control", type="password",
+            required=True) }}
+            <!-- <span id="confirm-password-error" class="text-danger"></span> -->
+            {% if form.confirm_password.errors %}
+            <span id="confirm-password-error" class="text-danger">{{ form.confirm_password.errors[0] }}</span>
+            {% endif %}
 
+        </div>
+        <div class="form-group">
+            <label for="address">Address<spn class="text-danger">*</spn></label>
+            {{ form.address(placeholder="Enter your address", class="form-control", required=True) }}
+            <!-- <span id="address-error" class="text-danger"></span> -->
+            {% if form.address.errors %}
+            <span id="address-error" class="text-danger">{{ form.address.errors[0] }}</span>
+            {% endif %}
+
+        </div>
+        <div class="form-group">
+            <label for="property_type">Property Type<spn class="text-danger">*</spn></label>
+            {{ form.property_type(placeholder="Enter your property type", class="form-control", required=True) }}
+            <!-- <span id="property-type-error" class="text-danger"></span> -->
+            {% if form.property_type.errors %}
+            <span id="property-type-error" class="text-danger">{{ form.property_type.errors[0] }}</span>
+            {% endif %}
+
+        </div>
+        <div class="form-group">
+            <label for="num_bedrooms">Number of Bedrooms<spn class="text-danger">*</spn></label>
+            {{ form.num_bedrooms(placeholder="Enter your number of bedrooms", class="form-control", required=True)
+            }}
+            <!-- <span id="num-bedrooms-error" class="text-danger"></span> -->
+            {% if form.num_bedrooms.errors %}
+            <span id="num-bedrooms-error" class="text-danger">{{ form.num_bedrooms.errors[0] }}</span>
+            {% endif %}
+
+        </div>
+        <div class="form-group">
+            <label for="evc">Energy Voucher Code<spn class="text-danger">*</spn></label>
+            {{ form.evc(placeholder="Energy Voucher Code", class="form-control") }}
+            <!-- <span id="evc-error" class="text-danger"></span> -->
+            {% if form.evc.errors %}
+            <span id="evc-error" class="text-danger">{{ form.evc.errors[0] }}</span>
+            {% endif %}
+
+        </div>
+        <div class="form-group text-center">
+            {{ form.submit(class="btn btn-primary", value="Register", type="submit", id="register-submit") }}
+        </div>
     </form>
-</body>
+    <div class="text-center">
+        <p>Already have an account? <a href="{{url_for('login')}}" class="text-primary">Login</a></p>
+    </div>
+</div>
 
-</html>
+
+
+{% block scripts %}
+<script>
+    // $(document).ready(function () {
+
+    //     $.ajaxSetup({
+    //         beforeSend: function (xhr, settings) {
+    //             if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+    //                 xhr.setRequestHeader("X-CSRFToken", csrf_token)
+    //             }
+    //         }
+    //     });
+
+    //     $("#RegistrationForm").on("submit", function (e) {
+    //         e.preventDefault(); // prevent the form from submitting normally
+
+    //         // gather form data
+    //         var formData = new FormData(this);
+    //         var email = formData.get("email");
+    //         var password = formData.get("password");
+    //         var confirm_password = formData.get("confirm_password");
+    //         var address = formData.get("address");
+    //         var property_type = formData.get("property_type");
+    //         var num_bedrooms = formData.get("num_bedrooms");
+    //         var evc = formData.get("evc");
+
+
+    //         console.log(formData.get("email"));
+
+    //         // make the AJAX request
+    //         $.ajax({
+    //             type: "POST",
+    //             url: "{{ url_for('register') }}",
+    //             data: {
+    //                 email: email, password: password,
+    //                 confirm_password: confirm_password, address: address,
+    //                 property_type: property_type, num_bedrooms: num_bedrooms,
+    //                 evc: evc
+    //             },
+    //             success: function (data) {
+    //                 if (data.success) {
+    //                     // registration successful, redirect to login page (seesion message to display on login page)
+    //                     window.location.href = "{{ url_for('login') }}";
+    //                 } else {
+    //                     // registration failed, display error messages
+    //                     $("#email-error").text(data.email_error);
+    //                     $("#password-error").text(data.password_error);
+    //                     $("#confirm-password-error").text(data.confirm_password_error);
+    //                     $("#address-error").text(data.address_error);
+    //                     $("#property_type-error").text(data.property_type_error);
+    //                     $("#num_bedrooms-error").text(data.num_bedrooms_error);
+    //                     $("#evc-error").text(data.evc_error);
+    //                 }
+    //             }
+    //         });
+    //     });
+    // });
+</script>
+{% endblock %}
+{% endblock %}

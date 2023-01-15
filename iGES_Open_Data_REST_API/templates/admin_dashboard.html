@@ -1,58 +1,69 @@
-<!DOCTYPE html>
-<html>
+{% extends 'master.html' %}
 
-<head>
-    <title>Admin Dashboard</title>
+{% block title %}Admin Dashboard{% endblock %}
 
-    <!-- bootstrap 4.0.0 -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-</head>
+{% block body %}
 
-<body>
-    <h1>Admin Dashboard</h1>
-    <nav>
-
-        <!-- iGSE admin Dashboard: unit price setting, view bills and statistics. -->
-        <!-- put this links into a button group and layout them in a row -->
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <a href="{{ url_for('set_tariffs') }}">Set Tariffs</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <a href="{{ url_for('admin_view_meter_readings') }}">View Meter Reading</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <a href="{{ url_for('admin_view_bills') }}">View Bills</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <a href="{{ url_for('admin_energy_statistics') }}">View Statistics</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                        </div>
-                    </div>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="alert alert-danger mt-3" role="alert">
+                {% for message in messages %}
+                {{ message }}
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            {% include 'admin_nav.html' %}
+        </div>
+    </div>
+    <h1 class="text-center">iGES Admin Dashboard</h1>
+    <div class="row mt-5">
+        <div class="col-md-2 bg-light">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ url_for('set_tariffs') }}">
+                            <i class="fas fa-money-bill-alt"></i>
+                            Set Tariffs
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('admin_view_meter_readings') }}">
+                            <i class="fas fa-tachometer-alt"></i>
+                            View Meter Reading
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('admin_view_bills') }}">
+                            <i class="fas fa-file-invoice"></i>
+                            View Bills
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('admin_energy_statistics') }}">
+                            <i class="fas fa-chart-bar"></i>
+                            View Statistics
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h3 class="text-center text-secondary">Average Energy Cost</h3>
+                    <hr>
                 </div>
             </div>
-    </nav>
-</body>
+        </div>
+    </div>
+</div>
 
-</html>
+{% endblock %}

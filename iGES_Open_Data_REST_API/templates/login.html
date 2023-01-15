@@ -1,35 +1,105 @@
-<!DOCTYPE html>
-<html>
+{% extends "master.html" %}
+{% block title %}Login{% endblock %}
+{% block head %}
 
-<head>
-    <title>Login</title>
-</head>
-
-<body>
-    <h1>Login</h1>
-    <form action="/login" method="post">
-        {{ form.hidden_tag() }}
-        <div>
-            {{ form.email(placeholder="Enter your email", size=32) }}
-            <p>
-                {% for error in form.email.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
+{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6 my-5">
+            <div class="text-center">
+                <h1>Login</h1>
+                <p>Enter your email and password to login.</p>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <ul class="flashed-messages list-unstyled">
+                    {% for message in messages %}
+                    {% if type %}
+                    <li class="alert alert-{{type}}">{{ message }}</li>
+                    {% else %}
+                    <li class="alert alert-success">{{ message }}</li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% endwith %}
+            </div>
+            <form action="{{ url_for('login') }}
+            " method="post" class="mt-4">
+                {{ form.hidden_tag() }}
+                <div class="form-group mb-1">
+                    <label for="email" class="form-label">Email</label>
+                    {{ form.email(placeholder="Enter your email", class="form-control form-control-lg " , type="email",
+                    autofocus="autofocus", required="required") }}
+                    {% for error in form.email.errors %}
+                    <span class="text-danger">[{{ error }}]</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group mb-2">
+                    <label for="password" class="form-label">Password</label>
+                    {{ form.password(placeholder="Enter your password", class="form-control form-control-lg",
+                    type="password", required="required") }}
+                    {% for error in form.password.errors %}
+                    <span class="text-danger">[{{ error }}]</span>
+                    {% endfor %}
+                </div>
+                <div class="form-group text-center mb-4">
+                    {{ form.submit(class="btn btn-primary btn-lg") }}
+                </div>
+            </form>
+            <p class="text-center">Don't have an account? <a href="/register">Register here</a>.</p>
         </div>
-        <div>
-            {{ form.password(placeholder="Enter your password", size=32) }}
-            <p>
-                {% for error in form.password.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
+    </div>
+</div>
+
+
+
+{% block scripts %}
+<script>
+    $("form").submit(function (e) {
+        e.preventDefault();
+        var formData = $(this).serialize();
+        $.ajax({
+            type: "POST",
+            url: "{{ url_for('login') }}",
+            data: formData,
+            success: function (data) {
+                if (data.success) {
+                    // Redirect the user to profile page
+                    window.location.href = "{{ url_for('profile') }}";
+                } else {
+                    // Display error message in the modal
+                    $('#errorModal').modal('show');
+                    $('#errorModal .modal-body').text(data.message);
+                }
+            }
+        });
+
+    });
+</script>
+</script>
+
+{% endblock %}
+
+<!-- error modal -->
+<div class="modal " id="errorModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title text-white">Error</h5>
+                <button type="button" class="close btn" data-bs-dismiss="modal" aria-label="Close">
+
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body ">
+                <p id="errorMessage"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
         </div>
-        <div>
-            {{ form.submit() }}
-        </div>
+    </div>
+</div>
 
-
-</body>
-
-</html>
+{% endblock %}

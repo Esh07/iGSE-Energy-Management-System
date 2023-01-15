@@ -1,64 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submit Meter Reading</title>
-</head>
-
-<body>
-    <h1>Submit Meter Reading</h1>
-    <form action="{{ url_for('submit_meter_reading') }}" method="post">
-        {{ form.hidden_tag() }}
-        <div>
-            {{ form.date( placeholder=date, size=32) }}
-            <p>
-                {% for error in form.date.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-
+{% extends "master.html" %}
+{% block title %}Submit Meter Reading{% endblock %}
+{% block body %}
+{% include "user_nav.html" %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6">
+            <div class="text-center">
+                <h1>Submit Meter Reading</h1>
+            </div>
+            <form action="{{ url_for('submit_meter_reading') }}" method="post">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    <label for="date">Date</label>
+                    {{ form.date(class="form-control", placeholder=date, size=32, required=True, autofocus=True) }}
+                    <p>
+                        {% for error in form.date.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                </div>
+                <div class="form-group">
+                    <label for="electricity_day">Electricity Meter Reading (Day) (kWh) <span
+                            style="color: red;">*</span></label>
+                    {{ form.electricity_day(class="form-control", placeholder="Enter the electricity meter reading - Day", size=32, required=True) }}
+                    <p>
+                        {% for error in form.electricity_day.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                </div>
+                <div class="form-group">
+                    <label for="electricity_night">Electricity Meter Reading (Night) (kWh) <span
+                            style="color: red;">*</span></label>
+                    {{ form.electricity_night(class="form-control", placeholder="Enter the electricity meter reading- Night", size=32, required=True) }}
+                    <p>
+                        {% for error in form.electricity_night.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                </div>
+                <div class="form-group">
+                    <label for="gas">Gas Meter Reading (kWh) <span style="color: red;">*</span></label>
+                    {{ form.gas(class="form-control", placeholder="Enter the gas meter reading", size=32,
+                    required=True )}}
+                    <p>
+                        {% for error in form.gas.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                </div>
+                <div class="form-group d-flex justify-content-end">
+                    {{ form.submit(class="btn btn-primary", value="Submit Meter Reading", type="submit", id="submit") }}
+                </div>
+            </form>
         </div>
-        <div>
-
-            {{ form.electricity_day(placeholder="Enter the electricity meter reading - Day", size=32) }}
-            <p>
-                {% for error in form.electricity_day.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-
-        </div>
-
-        <div>
-
-            {{ form.electricity_night(placeholder="Enter the electricity meter reading - Night", size=32) }}
-            <p>
-                {% for error in form.electricity_night.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-
-        </div>
-
-        <div>
-
-            {{ form.gas(placeholder="Enter the gas meter reading", size=32) }}
-            <p>
-                {% for error in form.gas.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-
-        </div>
-
-        <div>
-            {{ form.submit() }}
-        </div>
-    </form>
-
-</body>
-
-</html>
+    </div>
+</div>
+{% endblock %}

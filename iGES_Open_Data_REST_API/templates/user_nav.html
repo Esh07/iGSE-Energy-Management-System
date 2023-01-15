@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">iGSE user</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <!-- home icon font awesome -->
+                    <a class="nav-link active" aria-current="page" href="{{ url_for('profile')}}">
+                        <i class=" fas fa-home"></i> Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <!-- meter reading icon font awesome -->
+                    <a class="nav-link" href="{{ url_for('submit_meter_reading') }}">
+                        <i class="fas fa-tachometer-alt"></i> Submit Meter Reading
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <!-- top up icon font awesome -->
+                    <a class="nav-link" href="{{ url_for('top_up') }}">
+                        <i class="fas fa-credit-card"></i> Top Up
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <!-- bill icon font awesome -->
+                    <a class="nav-link" href="{{ url_for('view_latest_bill') }}">
+                        <i class="fas fa-file-invoice"></i> View Latest Bill
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <!-- logout icon font awesome -->
+                    <a class="nav-link" href="{{ url_for('logout') }}">
+                        <i class="fas fa-power-off"></i> Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

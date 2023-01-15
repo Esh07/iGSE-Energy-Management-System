@@ -1,32 +1,46 @@
-<!DOCTYPE html>
-<html>
+{% extends "master.html" %}
+{% block title %}Admin Login{% endblock %}
 
-<head>
-    <title>Admin Login</title>
-</head>
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin-login.css') }}">
+{% endblock %}
 
-<body>
-    <h1>Admin Login</h1>
-
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul class=flashes>
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
-    <form method="post" action="{{ url_for('admin_login') }}">
-        {{ form.hidden_tag() }}
-        <label for="username">Username:</label>
-        {{ form.email }}
-        <br>
-        <label for="password">Password:</label>
-        {{ form.password }}
-        <br>
-        <input type="submit" value="Login">
-    </form>
-</body>
-
-</html>
+{% block body %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6">
+            <div class="text-center">
+                <h1 class="text-danger">Admin Login</h1>
+                <p class="text-secondary">Access your admin dashboard</p>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <div class="alert alert-danger" role="alert">
+                    {% for message in messages %}
+                    {{ message }}
+                    {% endfor %}
+                </div>
+                {% endif %}
+                {% endwith %}
+            </div>
+            <form method="post" action="{{ url_for('admin_login') }}" class="my-4">
+                {{ form.hidden_tag() }}
+                <div class="form-group mb-2">
+                    <label for="email">Email:</label>
+                    {{ form.email(class="form-control", autofocus="autofocus", required="required", type="email") }}
+                </div>
+                <div class="form-group mb-4">
+                    <label for="password">Password:</label>
+                    {{ form.password(class="form-control", required="required", type="password") }}
+                </div>
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-danger btn-block" , value="Login") }}
+                </div>
+            </form>
+            <div class="text-center my-3">
+                <span>Don't have an account? <a href="{{ url_for('admin_register') }}" class="text-danger"> Register
+                        here.</a></span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,84 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "master.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Tariffs</title>
-</head>
+{% block title %}Update Tariffs{% endblock %}
+{% block head %}
+{% endblock %}
 
-<body>
-    <h1>Update Tariffs</h1>
+{% block body %}
+{% include "admin_nav.html" %}
+<h1 class="text-center">Update Tariffs</h1>
 
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul class=flashes>
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
-
-    <form method="POST">
-        {{ form.hidden_tag() }}
-        <table>
-            {{ form.electricity_day_per_kWh.label.text }}
-            {{ form.electricity_day_per_kWh(size=20, value=0.15) }}
-            {% if form.electricity_day_per_kWh.errors %}
-            <ul class=errors>
-                {% for error in form.electricity_day_per_kWh.errors %}
-                <li>{{ error }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
-
-        </table>
-        <table>
-            {{ form.electricity_night_per_kWh.label.text }}
-            {{ form.electricity_night_per_kWh(size=20, value=0.10) }}
-            {% if form.electricity_night_per_kWh.errors %}
-            <ul class=errors>
-                {% for error in form.electricity_night_per_kWh.errors %}
-                <li>{{ error }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
-
-        </table>
-        <table>
-            {{ form.gas_per_kWh.label.text }}
-            {{ form.gas_per_kWh(size=20, value=0.05) }}
-            {% if form.gas_per_kWh.errors %}
-            <ul class=errors>
-                {% for error in form.gas_per_kWh.errors %}
-                <li>{{ error }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
-
-        </table>
-        <table>
-            {{ form.standing_charge_per_day.label.text }}
-            {{ form.standing_charge_per_day(size=20, value=0.10) }}
-            {% if form.standing_charge_per_day.errors %}
-            <ul class=errors>
-                {% for error in form.standing_charge_per_day.errors %}
-                <li>{{ error }}</li>
-                {% endfor %}
-            </ul>
-            {% endif %}
-
-        </table>
-        <table>
-            <tr>
-                <td>{{ form.submit() }}</td>
-            </tr>
-        </table>
-    </form>
-
-
-</body>
-
-</html>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<div class="alert alert-danger">
+    {% for message in messages %}
+    {{ message }}
+    {% endfor %}
+</div>
+{% endif %}
+{% endwith %}
+<form method="POST" class="container gap-3 d-flex flex-column justify-content-space-evenly">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{ form.electricity_day_per_kWh.label(class="form-control-label")}}
+        {{ form.electricity_day_per_kWh(class="form-control",value=0.15) }}
+        {% if form.electricity_day_per_kWh.errors %}
+        <div class="text-danger">
+            {% for error in form.electricity_day_per_kWh.errors %}
+            {{ error }}
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    <div class="form-group">
+        {{ form.electricity_night_per_kWh.label(class="form-control-label")}}
+        {{ form.electricity_night_per_kWh(class="form-control",value=0.10) }}
+        {% if form.electricity_night_per_kWh.errors %}
+        <div class="text-danger">
+            {% for error in form.electricity_night_per_kWh.errors %}
+            {{ error }}
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    <div class="form-group">
+        {{ form.gas_per_kWh.label(class="form-control-label")}}
+        {{ form.gas_per_kWh(class="form-control",value=0.05) }}
+        {% if form.gas_per_kWh.errors %}
+        <div class="text-danger">
+            {% for error in form.gas_per_kWh.errors %}
+            {{ error }}
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    <div class="form-group">
+        {{ form.standing_charge_per_day.label(class="form-control-label")}}
+        {{ form.standing_charge_per_day(class="form-control",value=0.10) }}
+        {% if form.standing_charge_per_day.errors %}
+        <div class="text-danger">
+            {% for error in form.standing_charge_per_day.errors %}
+            {{ error }}
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    <div class="form-group text-center">
+        {{ form.submit(class="btn btn-danger", value="Update") }}
+    </div>
+</form>
+{% endblock %}

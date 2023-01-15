@@ -1,40 +1,88 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "master.html" %}
+{% block title %}Index{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index page</title>
-</head>
+{% block head %}
+{% endblock %}
 
-<body>
-    <h1>Index page</h1>
-    <!-- render flash message -->
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul class=flashes>
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
-    <!-- render flash message -->
+{% block body %}
+<div class="container-fluid bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
+        <a class="navbar-brand" href="#">iGSE Energy</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="{{ url_for('admin_login') }}" class="btn btn-danger my-2">Admin Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
+    <div class="row justify-content-center my-5">
+        <div class="col-12 col-md-6">
+            <div class="text-center">
+                <h1 class="text-primary">Welcome to Our Energy Company</h1>
+                <p class="text-secondary">Connecting you to clean and sustainable energy</p>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <div class="alert alert-danger" role="alert">
+                    {% for message in messages %}
+                    {{ message }}
+                    {% endfor %}
+                </div>
+                {% endif %}
+                {% endwith %}
+                <div class="my-4">
+                    <a href="{{ url_for('register') }}" class="btn btn-success my-2">Register</a>
+                    <a href="{{ url_for('login') }}" class="btn btn-primary my-2">Login</a>
+                </div>
+            </div>
+            <div class="card my-4">
+                <div class="card-body">
+                    <!-- current_user: -->
+                    <h5 class="card-title">Current User</h5>
+                    <p>{{ current_user }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <p>Click on the links below to navigate to the other pages</p>
-    <a href="{{ url_for('register') }}">Register</a>
-    <a href="{{ url_for('login') }}">Login</a>
+{% block scripts %}
+<script>
+    $(document).ready(function () {
+        // console.log('ready');
+        // if (window.getComputedStyle(document.querySelector('.navbar-toggler')).display === 'none') {
+        //     // if display is none, element is not visible
+        //     $('#navbarNav').removeClass('collapse');
+        //     console.log('not visible');
+        // } else {
+        //     // if display is block, element is visible
+        //     $('#navbarNav').addClass('collapse');
+        //     console.log('visible');
+        // }
 
-
-    <!-- render the all propery of user which i passes as json dump -->
-    <p>{{ current_user }}</p>
-
-
-
-
-
-</body>
-
-</html>
+        if ($('.navbar-toggler').is(':visible')) {
+            $('#navbarNav').addClass('nav-collapse');
+            // remove the css property 
+            $('#navbarNav').css('justify-content', '');
+            console.log('visible');
+        } else {
+            // $('#navbarNav').removeClass('navbar-collapse');
+            $('#navbarNav').css('justify-content', 'flex-end');
+            console.log('not visible');
+        }
+    });
+    $(window).resize(function () {
+        if ($('.navbar-toggler').is(':visible')) {
+            $('#navbarNav').addClass('collapse');
+        } else {
+            $('#navbarNav').removeClass('collapse');
+        }
+    });
+</script>
+{% endblock scripts %}
+{% endblock body %}

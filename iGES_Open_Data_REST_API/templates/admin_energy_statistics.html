@@ -1,31 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "master.html" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Energy statistics</title>
-</head>
+{% block title %}Energy Statistics{% endblock %}
 
-<body>
+{% block body %}
+{% include "admin_nav.html" %}
 
-    <h1>Energy statistics</h1>
+<div class="container mt-5">
+    <h1>Energy Statistics</h1>
 
     {% with messages = get_flashed_messages() %}
     {% if messages %}
-    <ul class=flashes>
+    <div class="alert alert-danger mt-3" role="alert">
         {% for message in messages %}
-        <li>{{ message }}</li>
+        {{ message }}
         {% endfor %}
-    </ul>
+    </div>
     {% endif %}
     {% endwith %}
-    <!-- dsiplay averge energy consumption "admin_energy_statistics"-->
-    <h2> Average energy consumption</h2>
 
-    <!-- I need to two table here one for Electricity which will have Electricity Day and Electrivity night and another table for Gas -->
-    <table>
+    <h2 class="mt-3"> Average energy consumption</h2>
+
+    <table class="table mt-3">
         <thead>
             <tr>
                 <th>Electricity Day</th>
@@ -35,13 +30,12 @@
         </thead>
         <tbody>
             <tr>
-                <td>{{ electricity_day_per_kWh }}</td>
-                <td>{{ electricity_night_per_kWh }}</td>
-                <td>{{ gas_per_kWh }}</td>
+                <td>{{ electricity_day_per_kWh|round(2) }}</td>
+                <td>{{ electricity_night_per_kWh|round(2) }}</td>
+                <td>{{ gas_per_kWh|round(2) }}</td>
             </tr>
         </tbody>
+    </table>
+</div>
 
-
-</body>
-
-</html>
+{% endblock %}
