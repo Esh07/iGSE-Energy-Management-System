@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/prakash/Desktop/kartik/iGSE-project/api/iGES_Open_Data_REST_API/api-env"
+VIRTUAL_ENV="/Users/prakash/Desktop/kartik/iGSE-project/iGES_Open_Data_REST_API/api-env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

@@ -6474,3 +6474,5 @@ INFO:werkzeug:127.0.0.1 - - [15/Jan/2023 00:47:05] "GET /igse/flat/1 HTTP/1.1" 2
 INFO:werkzeug:127.0.0.1 - - [15/Jan/2023 00:47:07] "GET /igse/flat/4 HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [15/Jan/2023 00:47:10] "GET /igse/flat/2 HTTP/1.1" 200 -
 INFO:werkzeug:127.0.0.1 - - [15/Jan/2023 00:47:12] "GET /igse/flat/7 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [15/Jan/2023 00:56:23] "GET /igse/flat/7 HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [15/Jan/2023 00:56:26] "GET /igse/flat/2 HTTP/1.1" 200 -
