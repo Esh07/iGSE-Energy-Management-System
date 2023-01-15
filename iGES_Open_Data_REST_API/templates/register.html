@@ -19,6 +19,7 @@
     {% endif %}
     {% endwith %}
 
+
     <form action="{{ url_for('register') }}" method="post" class="mt-4 mx-auto d-flex gap-2 flex-column"
         style="max-width: 400px;" id="RegistrationForm">
 
@@ -26,137 +27,242 @@
         <div class="form-group">
             <label for="email">Email address<spn class="text-danger">*</spn></label>
             {{ form.email(placeholder="Enter your email", class="form-control", type="email", autofocus=True,
-            required=True) }}
-            <!-- <span id="email-error" class="text-danger"></span> -->
-            {% if form.email.errors %}
-            <span id="email-error" class="text-danger">{{ form.email.errors[0] }}</span>
-            {% endif %}
+            required=True, id="email") }}
+            <span id="email-error" class="text-danger"></span>
 
 
         </div>
         <div class="form-group">
             <label for="password">Password<spn class="text-danger">*</spn></label>
-            {{ form.password(placeholder="Enter your password", class="form-control", type="password", required=True) }}
-            <!-- <span id="password-error" class="text-danger"></span> -->
-            {% if form.password.errors %}
-            <span id="password-error" class="text-danger">{{ form.password.errors[0] }}</span>
-            {% endif %}
+            {{ form.password(placeholder="Enter your password", class="form-control", type="password", required=True,
+            id="password") }}
+            <span id="password-error" class="text-danger"></span>
 
         </div>
         <div class="form-group">
             <label for="confirm_password">Confirm Password<spn class="text-danger">*</spn></label>
             {{ form.confirm_password(placeholder="Confirm your password", class="form-control", type="password",
-            required=True) }}
-            <!-- <span id="confirm-password-error" class="text-danger"></span> -->
-            {% if form.confirm_password.errors %}
-            <span id="confirm-password-error" class="text-danger">{{ form.confirm_password.errors[0] }}</span>
-            {% endif %}
+            required=True, id="confirm_password") }}
+            <span id="confirm-password-error" class="text-danger"></span>
 
         </div>
         <div class="form-group">
             <label for="address">Address<spn class="text-danger">*</spn></label>
-            {{ form.address(placeholder="Enter your address", class="form-control", required=True) }}
-            <!-- <span id="address-error" class="text-danger"></span> -->
-            {% if form.address.errors %}
-            <span id="address-error" class="text-danger">{{ form.address.errors[0] }}</span>
-            {% endif %}
+            {{ form.address(placeholder="Enter your address", class="form-control", required=True, id="address") }}
+            <span id="address-error" class="text-danger"></span>
 
         </div>
         <div class="form-group">
             <label for="property_type">Property Type<spn class="text-danger">*</spn></label>
-            {{ form.property_type(placeholder="Enter your property type", class="form-control", required=True) }}
-            <!-- <span id="property-type-error" class="text-danger"></span> -->
-            {% if form.property_type.errors %}
-            <span id="property-type-error" class="text-danger">{{ form.property_type.errors[0] }}</span>
-            {% endif %}
+            {{ form.property_type(placeholder="Enter your property type", class="form-control", required=True,
+            type="text", id="property_type")
+            }}
+            <span id="property-type-error" class="text-danger"></span>
 
         </div>
         <div class="form-group">
             <label for="num_bedrooms">Number of Bedrooms<spn class="text-danger">*</spn></label>
-            {{ form.num_bedrooms(placeholder="Enter your number of bedrooms", class="form-control", required=True)
+            {{ form.num_bedrooms(placeholder="Enter your number of bedrooms", class="form-control", required=True,
+            type="number", id="num_bedrooms")
             }}
-            <!-- <span id="num-bedrooms-error" class="text-danger"></span> -->
-            {% if form.num_bedrooms.errors %}
-            <span id="num-bedrooms-error" class="text-danger">{{ form.num_bedrooms.errors[0] }}</span>
-            {% endif %}
+            <span id="num-bedrooms-error" class="text-danger"></span>
 
         </div>
         <div class="form-group">
             <label for="evc">Energy Voucher Code<spn class="text-danger">*</spn></label>
-            {{ form.evc(placeholder="Energy Voucher Code", class="form-control") }}
-            <!-- <span id="evc-error" class="text-danger"></span> -->
-            {% if form.evc.errors %}
-            <span id="evc-error" class="text-danger">{{ form.evc.errors[0] }}</span>
-            {% endif %}
+            {{ form.evc(placeholder="Energy Voucher Code", class="form-control", required=True, type="text", id="evc")
+            }}
+            <span id="evc-error" class="text-danger"></span>
 
         </div>
         <div class="form-group text-center">
             {{ form.submit(class="btn btn-primary", value="Register", type="submit", id="register-submit") }}
+            <button onclick="startQRCodeScan()"
+                class="btn btn-secondary mt-3 mb-3 mx-auto d-block text-center text-white"> <i
+                    class="fa-solid fa-qrcode"></i> Scan QR Code </button>
+
         </div>
     </form>
     <div class="text-center">
         <p>Already have an account? <a href="{{url_for('login')}}" class="text-primary">Login</a></p>
     </div>
+
+    {% include "qrcode.html" %}
+
 </div>
 
 
 
 {% block scripts %}
+
 <script>
-    // $(document).ready(function () {
+    $(document).ready(function () {
+        // Check email field on change
+        $("#email").change(function () {
+            var email = $(this).val();
 
-    //     $.ajaxSetup({
-    //         beforeSend: function (xhr, settings) {
-    //             if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
-    //                 xhr.setRequestHeader("X-CSRFToken", csrf_token)
-    //             }
-    //         }
-    //     });
+            // check if email is empty
+            // if (email == " ") {
+            //     // Display error message
+            //     $("#email-error").text("Email is required.");
+            //     $(this).addClass("border-danger");
+            //     $(this).next().addClass("text-danger").html('<i class="fas fa-times"></i>');
+            //     return;
+            // }
+            // Use an AJAX request to check the email in the database
+            $.ajax({
+                type: "POST",
+                url: "{{ url_for('check_email') }}",
+                data: { email: email },
+                success: function (data) {
+                    if (data.exists) {
+                        // Display error message
+                        $("#email").addClass("border-danger");
+                        $("#email").next().addClass("text-danger").html('<i class="fas fa-times"></i> This email is already in use.');
+                    } else {
+                        // Clear error message
+                        $("#email").removeClass("border-danger");
+                        $("#email").addClass("border-success");
+                        $("#email").next().removeClass("text-danger")
+                        $("#email").next().addClass("text-success").html('<i class="fas fa-check"></i> This email is available.');
+                    }
+                }
+            });
+        });
 
-    //     $("#RegistrationForm").on("submit", function (e) {
-    //         e.preventDefault(); // prevent the form from submitting normally
+        // Check password field on change
+        $("#password").change(function () {
+            var password = $(this).val();
+            // Check if password meets requirements
+            if (password.length < 8) {
+                // Display error message
+                $(this).addClass("border-danger");
+                $(this).next().addClass("text-danger").html('<i class="fas fa-times"></i> Password must be at least 8 characters long.');
+            } else {
+                // Clear error message
+                $(this).removeClass("border-danger");
+                $(this).addClass("border-success");
+                // reomve text-danger class
+                $(this).next().removeClass("text-danger")
+                $(this).next().addClass("text-success").html('<i class="fas fa-check"></i> Password meets requirements.');
+            }
+        });
 
-    //         // gather form data
-    //         var formData = new FormData(this);
-    //         var email = formData.get("email");
-    //         var password = formData.get("password");
-    //         var confirm_password = formData.get("confirm_password");
-    //         var address = formData.get("address");
-    //         var property_type = formData.get("property_type");
-    //         var num_bedrooms = formData.get("num_bedrooms");
-    //         var evc = formData.get("evc");
+        // Check confirm password field on change
+        $("#confirm_password").change(function () {
+            var password = $("#password").val();
+            var confirm_password = $(this).val();
+            // Check if password and confirm password match
+            if (password != confirm_password) {
+                // Display error message
+                $(this).addClass("border-danger");
 
+                $(this).next().addClass("text-danger").html('<i class="fas fa-times"></i> Passwords do not match.');
+            } else {
+                // Clear error message
+                $(this).removeClass("border-danger");
+                $(this).addClass("border-success");
+                $(this).next().removeClass("text-danger")
+                $(this).next().addClass("text-success").html('<i class="fas fa-check"></i> Passwords match.');
+            }
+        });
 
-    //         console.log(formData.get("email"));
+        // Check address field on change
+        $("#address").change(function () {
+            var address = $(this).val();
+            // Check if address is empty
+            if (address == "") {
+                // Display error message
+                $(this).addClass("border-danger");
+                $(this).next().addClass("text-danger").html('<i class="fas fa-times"></i> Address is required.');
+            } else {
+                // Clear error message
+                $("#address-error").text("");
+                $(this).removeClass("border-danger");
+                $(this).addClass("border-success");
+                $(this).next().removeClass("text-danger")
+                $(this).next().addClass("text-success").html('<i class="fas fa-check"></i> Address is valid.');
+            }
+        });
 
-    //         // make the AJAX request
-    //         $.ajax({
-    //             type: "POST",
-    //             url: "{{ url_for('register') }}",
-    //             data: {
-    //                 email: email, password: password,
-    //                 confirm_password: confirm_password, address: address,
-    //                 property_type: property_type, num_bedrooms: num_bedrooms,
-    //                 evc: evc
-    //             },
-    //             success: function (data) {
-    //                 if (data.success) {
-    //                     // registration successful, redirect to login page (seesion message to display on login page)
-    //                     window.location.href = "{{ url_for('login') }}";
-    //                 } else {
-    //                     // registration failed, display error messages
-    //                     $("#email-error").text(data.email_error);
-    //                     $("#password-error").text(data.password_error);
-    //                     $("#confirm-password-error").text(data.confirm_password_error);
-    //                     $("#address-error").text(data.address_error);
-    //                     $("#property_type-error").text(data.property_type_error);
-    //                     $("#num_bedrooms-error").text(data.num_bedrooms_error);
-    //                     $("#evc-error").text(data.evc_error);
-    //                 }
-    //             }
-    //         });
-    //     });
-    // });
+        // Check property type field on change
+        $("#property_type").change(function () {
+            var property_type = $(this).val();
+            // Check if property type is empty
+            if (property_type == "") {
+                // Display error message
+                $(this).addClass("border-danger");
+                $(this).next().addClass("text-danger").html('<i class="fas fa-times"></i> Property type is required.');
+            } else {
+                // Clear error message
+                $(this).removeClass("border-danger");
+                $(this).addClass("border-success");
+                $(this).next().removeClass("text-danger")
+                $(this).next().addClass("text-success").html('<i class="fas fa-check"></i> Property type is valid.');
+            }
+        });
+
+        // Check number of bedrooms field on change
+        $("#num_bedrooms").change(function () {
+            var num_bedrooms = $(this).val();
+            // Check if number of bedrooms is empty
+            if (num_bedrooms == "") {
+                // Display error message
+                $(this).addClass("border-danger");
+                $(this).next().addClass("text-danger").html('<i class="fas fa-times"></i> Number of bedrooms is required.');
+            }
+            else if (num_bedrooms < 1) {
+                // Display error message
+                $(this).addClass("border-danger");
+                $(this).next().addClass("text-danger").html('<i class="fas fa-times"></i> Number of bedrooms must be at least 1.');
+            }
+            // check if it is a number
+            else if (isNaN(num_bedrooms)) {
+                // Display error message
+                $(this).addClass("border-danger");
+                $(this).next().addClass("text-danger").html('<i class="fas fa-times"></i> Number of bedrooms must be a number.');
+            }
+            else {
+                // Clear error message
+                $(this).removeClass("border-danger");
+                $(this).addClass("border-success");
+                $(this).next().removeClass("text-danger")
+                $(this).next().addClass("text-success").html('<i class="fas fa-check"></i> Number of bedrooms is valid.');
+            }
+        });
+
+        // check energy voucher code field on change
+        $("#evc").change(function () {
+            var energy_voucher_code = $(this).val();
+            // Check if energy voucher code is empty
+            $.ajax({
+                type: "POST",
+                url: "{{ url_for('check_evc_code') }}",
+                data: { energy_voucher_code: energy_voucher_code },
+                success: function (data) {
+                    if (data.exists) {
+                        // Display error message
+                        $("#evc").addClass("border-danger");
+                        // get the error message from the server
+                        $("#evc").next().addClass("text-danger").html('<i class="fas fa-times"></i> ' + data.message);
+                    } else if (data.not_valid_code) {
+                        // Display error message
+                        $("#evc").addClass("border-danger");
+                        // get the error message from the server
+                        $("#evc").next().addClass("text-danger").html('<i class="fas fa-times"></i> ' + data.message);
+                    }
+
+                    else {
+                        // Clear error message
+                        $("#evc").removeClass("border-danger");
+                        $("#evc").addClass("border-success");
+                        $("#evc").next().removeClass("text-danger")
+                        $("#evc").next().addClass("text-success").html('<i class="fas fa-check"></i> This energy voucher code is available.');
+                    }
+                }
+            });
+        });
+    });
 </script>
 {% endblock %}
 {% endblock %}

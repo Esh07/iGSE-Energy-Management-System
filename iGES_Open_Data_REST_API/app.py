@@ -557,57 +557,56 @@ def register():
     return render_template('register.html', form=form)
 
 
-@ app.route('/login', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
-    if form.validate_on_submit():
-        email = form.email.data
-        password = form.password.data
-        user = User.query.filter_by(email=email).first()
-        if user is not None and user.check_password(password):
-            login_user(user)
-            # forward user to the profile page
-            next_page = request.args.get('profile')
-            session['user'] = json.dumps(user.to_dict())
-            # rendder template with current_user
-            flash("You are logged in!")
-            # rendder template with current_user
-            return redirect(url_for('profile'))
-
-        if user is None:
-            flash("User does not exist")
-            form.email.errors.append("User does not exist")
-            return render_template('login.html', form=form, type='danger')
-        if user is not None and not user.check_password(password):
-            flash("Incorrect password")
-            form.password.errors.append("Incorrect password")
-            return render_template('login.html', form=form, type='danger')
-        return render_template('login.html', form=form)
-    return render_template('login.html', form=form)
-
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-        # Request is an AJAX request
-        email = form.email.data
-        password = form.password.data
-        user = User.query.filter_by(email=email).first()
-        if user is not None and user.check_password(password):
-            login_user(user)
-            # forward user to the profile page
-            session['user'] = json.dumps(user.to_dict())
-            # rendder template with current_user
-            flash("You are logged in!")
-            # rendder template with current_user
-        if user is None:
-            flash("User does not exist")
-            form.email.errors.append("User does not exist")
-            return jsonify(success=False, message='User does not exist', type='danger')
-
-        if user is not None and not user.check_password(password):
-            flash("Incorrect password")
-            form.password.errors.append("Incorrect password")
-            return jsonify(success=False, message='Invalid email or password', type='danger')
-        return jsonify(success=False, message='Invalid email or password', type='danger')
-    return redirect(url_for('profile'))
+        if request.method == 'POST':
+            if form.validate_on_submit():
+                email = form.email.data
+                password = form.password.data
+                user = User.query.filter_by(email=email).first()
+                if user is None:
+                    return jsonify(success=False, message='User does not exist', type='danger')
+                if user is not None and not user.check_password(password):
+                    return jsonify(success=False, message='Invalid email or password', type='danger')
+                if user is not None and user.check_password(password):
+                    login_user(user)
+                    session['user'] = json.dumps(user.to_dict())
+                    flash("You are logged in!")
+                    return jsonify(success=True, message='You are logged in!', type='success')
+            # fetch the error from the form.errors dictionary
+            message = form.errors
+            errors = []
+            for key, value in message.items():
+                errors.append(value[0])
+            return jsonify(success=False, errors=errors, type='danger')
+        return redirect(url_for('profile'))
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            email = form.email.data
+            password = form.password.data
+            user = User.query.filter_by(email=email).first()
+            if user is not None and user.check_password(password):
+                login_user(user)
+                next_page = request.args.get('profile')
+                session['user'] = json.dumps(user.to_dict())
+                flash("You are logged in!")
+                return redirect(url_for('profile'))
+            if user is None:
+                flash("User does not exist")
+                form.email.errors.append("User does not exist")
+                return render_template('login.html', form=form, type='danger')
+            if user is not None and not user.check_password(password):
+                flash("Invalid email or password")
+                form.email.errors.append("Invalid email or password")
+                return render_template('login.html', form=form, type='danger')
+        else:
+            print(form.errors)
+            print(form.errors.items())
+            logging.debug(f'Form not valid')
+            print("Form not valid - else clause")
+    return render_template('login.html', form=form)
 
 
 @ app.route('/profile')
@@ -627,9 +626,6 @@ def logout():
         logout_user()
         session.pop('user_id', None)
         flash("You are logged out!")
-    else:
-        flash("You are not logged in")
-        return redirect(url_for('index'))
     return redirect(url_for('index'))
 
 
@@ -758,13 +754,13 @@ def pay_bill(bill_id):
         bill = Bill.query.filter_by(id=bill_id).first()
         if not bill:
             flash('Bill not found', 'danger')
-            return redirect(url_for('view_latest_bill'))
+            return redirect(url_for('view_latest_bill', type='danger'))
         if bill.customer_id != current_user.id:
             flash('Unauthorized access', 'danger')
-            return redirect(url_for('view_latest_bill'))
+            return redirect(url_for('view_latest_bill', type='danger'))
         if bill.is_paid:
             flash('Bill already paid', 'info')
-            return redirect(url_for('view_latest_bill'))
+            return redirect(url_for('view_latest_bill', type='info'))
 
         if current_user.energy_credit < bill.bill_amount:
             flash('Not enough credit to pay the bill', 'danger')
@@ -777,7 +773,7 @@ def pay_bill(bill_id):
     else:
         flash("You are not logged in")
         return redirect(url_for('login'))
-    return redirect(url_for('view_latest_bill'))
+    return redirect(url_for('view_latest_bill', type='success'))
 
 
 # top-up
@@ -1094,6 +1090,31 @@ def energy_usage_stats(property_type, num_bedrooms):
          "average_electricity_gas_cost_per_day": average_electricity_gas_cost_per_day,
          "unit": "pound"}
     )
+
+
+@app.route('/check_email', methods=['POST'])
+def check_email():
+    email = request.form.get('email')
+    user = User.query.filter_by(email=email).first()
+    if user:
+        return jsonify(exists=True)
+    else:
+        return jsonify(exists=False)
+
+# check evc code is valid
+
+
+@app.route('/check_evc_code', methods=['POST'])
+def check_evc_code():
+    evc_code = request.form.get('energy_voucher_code')
+    print(evc_code)
+    # check if evc code is valid in the evc table
+    evc = EVC.query.filter_by(evc=evc_code).first()
+    if evc is not None and evc.evc == evc_code:
+        print('user exists')
+        return jsonify(exists=True, message='EVC code is already used')
+    if evc_code not in valid_evc_codes:
+        return jsonify(not_valid_code=True, message='EVC code is invalid')
 
 
 if __name__ == '__main__':

@@ -6,6 +6,20 @@
     <div class="row justify-content-center">
         <div class="col-12 col-md-8">
             <div class="text-center">
+
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <ul class="flashed-messages list-unstyled">
+                    {% for message in messages %}
+                    {% if type %}
+                    <li class="alert alert-{{type}}">{{ message }}</li>
+                    {% else %}
+                    <li class="alert alert-success">{{ message }}</li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% endwith %}
                 <h1>Profile</h1>
                 <p>Welcome, {{ current_user.email }}</p>
             </div>
@@ -23,7 +37,7 @@
                         <div class="col-12 col-md-4">
                             <h5 class="card-title">Property Type:</h5>
                         </div>
-                        <div class="col-12 col" -md-8">
+                        <div class="col-12 col-md-8">
                             <p class="card-text">{{ current_user.property_type }}</p>
                         </div>
                     </div>
@@ -48,15 +62,24 @@
                             <h5 class="card-title">Energy Credit:</h5>
                         </div>
                         <div class="col-12 col-md-8">
-                            <p class="card-text">{{ current_user.energy_credit }}</p>
+                            <p class="card-text">£ {{ current_user.energy_credit }}</p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12 col-md-4">
-                            <h5 class="card-title">Energy Bill:</h5>
+                            <h5 class="card-title">Energy Bill (Not Paid):</h5>
                         </div>
                         <div class="col-12 col-md-8">
-                            <p class="card-text">{{ current_user.energy_bill }}</p>
+                            <!-- # show bill that is not paid -->
+                            {% if current_user.bill %}
+                            {% for bill in current_user.bill %}
+                            {% if bill.is_paid == False %}
+                            <p class="card-text">£ {{ bill.bill_amount }}</p>
+                            {% endif %}
+                            {% endfor %}
+                            {% else %}
+                            <p class="card-text">No bill to pay</p>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

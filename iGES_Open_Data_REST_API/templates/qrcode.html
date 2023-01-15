@@ -1,0 +1,47 @@
+{% block head %}
+<!-- https://cdn.jsdelivr.net/npm/jsqr@1.0.4/dist/jsQR.min.js -->
+<script src="https://cdn.jsdelivr.net/npm/jsqr@1.0.4/dist/jsQR.min.js"></script>
+
+{% endblock %}
+
+
+{% block body %}
+
+
+<video id="camera-feed" width="300" height="200"></video>
+<canvas id="qr-canvas"></canvas>
+
+
+{% block scripts %}
+<script>
+    function handleQRCodeScan(code) {
+        document.getElementById("evc").value = code;
+    }
+
+    function startQRCodeScan() {
+        // Get the video and canvas elements
+        var video = document.getElementById("camera-feed");
+        var canvas = document.getElementById("qr-canvas");
+        var context = canvas.getContext("2d");
+
+        // Request access to the camera
+        navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
+            video.srcObject = stream;
+            video.play();
+
+            // Continuously scan the camera feed for QR codes
+            setInterval(function () {
+                context.drawImage(video, 0, 0, 300, 200);
+                var imageData = context.getImageData(0, 0, 300, 200);
+                var code = jsQR(imageData.data, imageData.width, imageData.height);
+                if (code) {
+                    handleQRCodeScan(code.data);
+                    stream.getTracks()[0].stop();
+                }
+            }, 100);
+        });
+    }
+
+</script>
+{% endblock %}
+{% endblock %}

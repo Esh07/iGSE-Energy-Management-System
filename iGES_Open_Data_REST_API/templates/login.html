@@ -25,7 +25,7 @@
                 {% endwith %}
             </div>
             <form action="{{ url_for('login') }}
-            " method="post" class="mt-4">
+            " method="post" class="mt-4" id="login-form">
                 {{ form.hidden_tag() }}
                 <div class="form-group mb-1">
                     <label for="email" class="form-label">Email</label>
@@ -56,13 +56,17 @@
 
 {% block scripts %}
 <script>
-    $("form").submit(function (e) {
+    $("#login-form").submit(function (e) {
         e.preventDefault();
         var formData = $(this).serialize();
+        var csrf_token = $('input[name="csrf_token"]').val();
         $.ajax({
             type: "POST",
             url: "{{ url_for('login') }}",
             data: formData,
+            headers: {
+                "X-CSRFToken": csrf_token
+            },
             success: function (data) {
                 if (data.success) {
                     // Redirect the user to profile page
@@ -70,13 +74,12 @@
                 } else {
                     // Display error message in the modal
                     $('#errorModal').modal('show');
-                    $('#errorModal .modal-body').text(data.message);
+                    $('#errorMessage').text(data.message);
                 }
             }
         });
 
     });
-</script>
 </script>
 
 {% endblock %}
