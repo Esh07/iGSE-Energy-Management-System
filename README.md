@@ -97,18 +97,21 @@ $ Flask run
 You can also set the environment variable FLASK_APP and FLASK_DEBUG to run the application in debug mode:
 
 <h5>MacOS / Linux </h5>
+
 ```bash
 $ export FLASK_APP=app.py
 $ export FLASK_DEBUG=1
 ``` 
 
 <h5>Windows (temporary session)</h5>
+
 ```cmd
 $ set FLASK_APP=app.py
 $ set FLASK_DEBUG=1
 ```
 
 <h5>Windows (permanent session)</h5>
+
 ```cmd
 $ setx FLASK_APP app.py
 $ setx FLASK_DEBUG 1
