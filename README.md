@@ -36,13 +36,14 @@ Run the following command to install the necessary packages:
 <caption style="text-style: italic; text-align: center; font-size: 11px;">
 If you using macOS or Linux, you may need to use <code style="color:#0f0f14; background-color:a9b1d6; font-weight:bold">pip3</code> instead of <code style="color:#0f0f14; background-color:a9b1d6; font-weight:bold">pip</code>; just to avoid dependency issues if you have both Python 2 and Python 3 installed on your system.
 </caption>
+
 ```bash
 $ pip install -r requirements.txt
 ```
 
 
 ## Database Setup
-Inside the app.py file, you will find the following line of code that defines the database connection at line 28:
+Inside the `app.py` file, you will find the following line of code that defines the database connection at line 28:
 ```python
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://api_user:123456@localhost:3306/RestServiceInterface'
 ```
@@ -51,10 +52,10 @@ This line of code sets the database connection to a MySQL database with the foll
 - `api_user` as the username
 - `123456` as the password
 - `localhost:3306` as the host
-- ` RestServiceInterface` as the database name
+- `RestServiceInterface` as the database name
 
 <blockquote style="border-left: 5px solid #f0ad4e; background-color: #fcf8e3; padding: 10px;">
-  <p><strong>NOTE:</strong> Before running the application, you will need to create the RestServiceInterface database and update the app.py file with your own database credentials.
+  <p><strong>NOTE:</strong> Before running the application, you will need to create the RestServiceInterface database and update the `app.py` file with your own database credentials.
     </p>
 </blockquote>
 
@@ -74,6 +75,7 @@ $ flask db init
 
 
 <caption style="text-align: center;">Run the following commands to generate the migration files for the database tables</caption>
+
 ```bash
 $ flask db migrate
 ```
