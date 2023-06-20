@@ -54,10 +54,7 @@ This line of code sets the database connection to a MySQL database with the foll
 - `localhost:3306` as the host
 - `RestServiceInterface` as the database name
 
-<blockquote style="border-left: 5px solid #f0ad4e; background-color: #fcf8e3; padding: 10px;">
-  <p><strong>NOTE:</strong> Before running the application, you will need to create the RestServiceInterface database and update the `app.py` file with your own database credentials.
-    </p>
-</blockquote>
+><strong>NOTE:</strong> Before running the application, you will need to create the database called <b>RestServiceInterface</b> or give a custom database name and update the `app.py` file ([line 28](https://github.com/Esh07/energy-backend-api/blob/main/iGES_Open_Data_REST_API/app.py#LL28C1-L28C1)) with your own database credentials.
 
 <caption style="text-align: center;">You can create the database using the following command: (it's one line query in MySQL)</caption>
 
