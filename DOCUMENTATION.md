@@ -158,7 +158,7 @@ You can also set the environment variable `FLASK_APP` and `FLASK_DEBUG` to run t
 
 ```bash
 export FLASK_APP=app.py
-export FLASK_DEBUG=1 # 1 to disable debug mode, 0 to enable debug mode
+export FLASK_DEBUG=1 # 1 to enable debug mode, 0 to disable debug mode
 ```
 
 <h5>Windows (temporary session)</h5>
@@ -172,7 +172,7 @@ This will set the environment variable permanently in the system and you will no
 
 ```bash
 setx FLASK_APP app.py
-setx FLASK_DEBUG 1 # 1 to disable debug mode, 0 to enable debug mode
+setx FLASK_DEBUG 1 # 1 to enable debug mode, 0 to disable debug mode
 ```
 
 This will start the application on http://localhost:5000/
