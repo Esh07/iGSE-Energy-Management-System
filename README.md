@@ -1,4 +1,4 @@
-# iGSE Energy Management System 
+# iGSE Energy Management System - Webapp
 This project was developed as part of a coursework assignment for the Mobile and Web Applications module. The iGSE Energy Management System aims to provide Shangri-La residents with a platform to manage their energy consumption and bills. It includes a web interface and a REST API.
 
 ## :bulb: Features
