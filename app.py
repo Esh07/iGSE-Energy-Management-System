@@ -437,8 +437,12 @@ class TopUpForm(FlaskForm):
     submit = SubmitField('Top Up')
 
 
-@ app.route('/register', methods=['GET', 'POST'], endpoint='register')
+@app.route('/register', methods=['GET', 'POST'], endpoint='register')
+@swag_from('api/docs/register.yml', endpoint='register')
 def register():
+    """ Register a new user
+    A new user can register by providing their email, password, address, property type, number of bedrooms and energy voucher code.
+    """
     # // i will make ajax call to this route
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         form = RegisterForm()
@@ -567,7 +571,11 @@ def register():
 
 
 @app.route('/login', methods=['GET', 'POST'], endpoint='login')
+@swag_from("api/docs/login.yml", endpoint='login')
 def login():
+    """ Login page
+    A user can login to the system using their email address and password.
+    """
     form = LoginForm()
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         if request.method == 'POST':
@@ -618,9 +626,13 @@ def login():
     return render_template('login.html', form=form)
 
 
-@ app.route('/profile', methods=['GET'], endpoint='profile')
-@ login_required
+@app.route('/profile', methods=['GET'], endpoint='profile')
+@login_required
+# @swag_from("api/docs/profile.yml", endpoint='profile')
 def profile():
+    """ Profile page
+    A user can view their profile page.
+    """
     if current_user.is_authenticated:
         user = json.loads(session['user'])
     else:
@@ -629,8 +641,12 @@ def profile():
     return render_template('profile.html', user=user)
 
 
-@ app.route('/logout', methods=['GET'], endpoint='logout')
+@app.route('/logout', methods=['GET'], endpoint='logout')
+@swag_from("api/docs/logout.yml", endpoint='logout')
 def logout():
+    """ Logout page
+    A user can logout of the system.
+    """
     if current_user.is_authenticated:
         logout_user()
         session.pop('user_id', None)
@@ -642,8 +658,18 @@ def logout():
 # def index():
 #     return render_template('index.html')
 
-@ app.route('/home', methods=['GET'], endpoint='home')
+@ app.route('/home', methods=['GET'], endpoint='index')
 def index():
+    """ Home page
+    A user can view the home page.
+    ---
+    tags:
+        - Home
+    responses:
+        200:
+            description: Home page
+    """
+
     # get flash messages
     messages = get_flashed_messages()
     if current_user.is_authenticated:
@@ -652,8 +678,18 @@ def index():
     return render_template('index.html', messages=messages)
 
 
-@ app.route('/', methods=['GET'], endpoint='root')
+@ app.route('/', methods=['GET'])
 def root():
+    """ Root page
+    A user can view the root page.
+    ---
+    tags:
+        - Root
+    responses:
+        200:
+            description: Root page
+    """
+
     if current_user.is_authenticated:
         return redirect(url_for('profile'))
     return redirect(url_for('index'))
@@ -662,6 +698,16 @@ def root():
 @ app.route('/submit-meter-reading', methods=['GET', 'POST'], endpoint='submit_meter_reading')
 @ login_required
 def submit_meter_reading():
+    """ Submit meter reading page
+    A user can submit their meter readings.
+    ---
+    tags:
+        - Submit meter reading
+    responses:
+        200:
+            description: Submit meter reading page
+    """
+
     if current_user.is_authenticated:
         form = MeterReadingForm()
         print(form.errors)
@@ -718,6 +764,16 @@ def submit_meter_reading():
 
 @ app.route('/energy-consumption', methods=['GET'], endpoint='energy_consumption')
 def get_energy_consumption():
+    """ Energy consumption page
+    A user can view their energy consumption.
+    ---
+    tags:
+        - Energy consumption
+    responses:
+        200:
+            description: Energy consumption page
+    """
+
     if current_user.is_authenticated:
         customer_id = request.args.get('customer_id')
         start_date = request.args.get('start_date')
@@ -739,6 +795,16 @@ def get_energy_consumption():
 @ app.route('/view_latest_bill', methods=['GET'], endpoint='view_latest_bill')
 @ login_required
 def view_latest_bill():
+    """ View latest bill page
+    A user can view their latest bill.
+    ---
+    tags:
+        - View latest bill
+    responses:
+        200:
+            description: View latest bill page
+    """
+
     if current_user.is_authenticated:
         messages = get_flashed_messages()
         latest_bill = Bill.query.filter_by(
@@ -759,6 +825,16 @@ def view_latest_bill():
 @ app.route('/pay_bill/<int:bill_id>', methods=['GET'], endpoint='pay_bill')
 @ login_required
 def pay_bill(bill_id):
+    """ Pay bill page
+    A user can pay their bill.
+    ---
+    tags:
+        - Pay bill
+    responses:
+        200:
+            description: Pay bill page
+    """
+
     if current_user.is_authenticated:
         bill = Bill.query.filter_by(id=bill_id).first()
         if not bill:
@@ -789,6 +865,16 @@ def pay_bill(bill_id):
 @ app.route('/top-up', methods=['GET', 'POST'], endpoint='top_up')
 @ login_required
 def top_up():
+    """ Top up page
+    A user can top up their energy credit.
+    ---
+    tags:
+        - Top up
+    responses:
+        200:
+            description: Top up page
+    """
+
     if current_user.is_authenticated:
         form = TopUpForm()
         if form.validate_on_submit():
@@ -825,6 +911,16 @@ def top_up():
 # =============------------- Admin Page -----------------==================
 @ app.route('/admin/register', methods=['GET', 'POST'], endpoint='admin_register')
 def admin_register():
+    """ Admin register page
+    An admin can register a new admin.
+    ---
+    tags:
+        - Admin register
+    responses:
+        200:
+            description: Admin register page
+    """
+
     messages = get_flashed_messages()
     print("Admin register")
     # if current_user.is_authenticated:
@@ -861,6 +957,16 @@ def admin_register():
 
 @ app.route('/admin/login', methods=['GET', 'POST'], endpoint='admin_login')
 def admin_login():
+    """ Admin login page
+    An admin can login.
+    ---
+    tags:
+        - Admin login
+    responses:
+        200:
+            description: Admin login page
+    """
+
     # if current_user.is_admin:
     #     return redirect(url_for('admin_dashboard'))
     # else:
@@ -893,6 +999,16 @@ def admin_login():
 
 @ app.route('/admin', endpoint='admin_dashboard')
 def admin_dashboard():
+    """ Admin dashboard page
+    An admin can view the admin dashboard.
+    ---
+    tags:
+        - Admin dashboard
+    responses:
+        200:
+            description: Admin dashboard page
+    """
+
     if not current_user.is_authenticated:
         flash('You must be logged in to access this page.')
         return redirect(url_for('admin_login'))
@@ -913,6 +1029,16 @@ def admin_dashboard():
 
 @ app.route('/admin/logout', endpoint='admin_logout')
 def admin_logout():
+    """ Admin logout page
+    An admin can logout.
+    ---
+    tags:
+        - Admin logout
+    responses:
+        200:
+            description: Admin logout page
+    """
+
     logout_user()
     flash('You are now logged out.')
     return redirect(url_for('index'))
@@ -921,6 +1047,16 @@ def admin_logout():
 @ app.route('/admin/set-tariffs', methods=['GET', 'POST'], endpoint='set_tariffs')
 @ login_required
 def set_tariffs():
+    """ Admin set tariffs page
+    An admin can set tariffs.
+    ---
+    tags:
+        - Admin set tariffs
+    responses:
+        200:
+            description: Admin set tariffs page
+    """
+
     if not current_user.is_authenticated:
         flash('You must be logged in to access this page.')
         return redirect(url_for('admin_login'))
@@ -957,6 +1093,16 @@ def set_tariffs():
 @ app.route('/admin/bills', endpoint='admin_view_bills')
 @ login_required
 def admin_view_bills():
+    """ Admin view bills page
+    An admin can view bills.
+    ---
+    tags:
+        - Admin view bills
+    responses:
+        200:
+            description: Admin view bills page
+    """
+
     if not current_user.is_authenticated:
         flash('You must be logged in to access this page.')
         return redirect(url_for('admin_login'))
@@ -979,6 +1125,16 @@ def admin_view_bills():
 @ app.route('/admin/bills/<int:bill_id>', endpoint='admin_view_bill')
 @ login_required
 def admin_view_bill(bill_id):
+    """ Admin view bill page
+    An admin can view a bill.
+    ---
+    tags:
+        - Admin view bill
+    responses:
+        200:
+            description: Admin view bill page
+    """
+
     if not current_user.is_authenticated:
         flash('You must be logged in to access this page.')
         return redirect(url_for('admin_login'))
@@ -993,6 +1149,16 @@ def admin_view_bill(bill_id):
 @ app.route('/admin/meter-readings', endpoint='admin_view_meter_readings')
 @ login_required
 def admin_view_meter_readings():
+    """ Admin view meter readings page
+    An admin can view meter readings.
+    ---
+    tags:
+        - Admin view meter readings
+    responses:
+        200:
+            description: Admin view meter readings page
+    """
+
     if not current_user.is_authenticated:
         flash('You must be logged in to access this page.')
         return redirect(url_for('admin_login'))
@@ -1008,6 +1174,16 @@ def admin_view_meter_readings():
 @ app.route('/admin/energy-statistics', endpoint='admin_energy_statistics')
 @ login_required
 def admin_energy_statistics():
+    """ Admin energy statistics page
+    An admin can view energy statistics.
+    ---
+    tags:
+        - Admin energy statistics
+    responses:
+        200:
+            description: Admin energy statistics page
+    """
+
     if not current_user.is_authenticated:
         flash('You must be logged in to access this page.')
         return redirect(url_for('admin_login'))
@@ -1046,6 +1222,16 @@ def admin_energy_statistics():
 # ====------- Task 2 API -------====
 @ app.route('/igse/propertycount', methods=['GET'], endpoint='get_property_count')
 def get_property_count():
+    """ Get property count
+    An admin can view the number of properties of each type.
+    ---
+    tags:
+        - Get property count
+    responses:
+        200:
+            description: Get property count
+    """
+
     if request.method == 'GET':
         print('get_property_count')
         # Query the database to group properties by type and count the number of properties in each group
@@ -1068,6 +1254,16 @@ def get_property_count():
 
 @ app.route("/igse/<property_type>/<num_bedrooms>", methods=['GET'], endpoint='get_energy_usage_stats')
 def energy_usage_stats(property_type, num_bedrooms):
+    """ Get energy usage stats
+    An admin can view the average energy usage per day for all customers based on their latest billing period.
+    ---
+    tags:
+        - Get energy usage stats
+    responses:
+        200:
+            description: Get energy usage stats
+    """
+
     try:
         # Join the User and Bill tables and filter by property_type and num_bedrooms
         user_bills = db.session.query(User, Bill).join(Bill).filter(
@@ -1104,8 +1300,31 @@ def energy_usage_stats(property_type, num_bedrooms):
     )
 
 
-@app.route('/check_email', methods=['POST'], endpoint='check_email')
+@ app.route('/check_email', methods=['POST'], endpoint='check_email')
 def check_email():
+    """ Check email
+    Check if email already exists in the database.
+    ---
+    tags:
+        - Check email
+    responses:
+        200:
+            description: Check email
+        400:
+            description: Email already exists
+
+    parameters:
+        - name: email
+          in: formData
+          type: string
+          required: true
+    definitions:
+        exists:
+            type: boolean
+            description: True if email exists in the database, false otherwise
+
+    """
+
     email = request.form.get('email')
     user = User.query.filter_by(email=email).first()
     if user:
@@ -1118,6 +1337,27 @@ def check_email():
 
 @ app.route('/check_evc_code', methods=['POST'], endpoint='check_evc_code')
 def check_evc_code():
+    """ Check EVC code
+    Check if EVC code is valid.
+    ---
+    tags:
+        - Check EVC code
+    responses:
+        200:
+            description: Check EVC code
+        400:
+            description: EVC code is invalid
+    parameters:
+        - name: energy_voucher_code
+          in: formData
+          type: string
+          required: true
+    definitions:
+        exists:
+            type: boolean
+            description: True if EVC code exists in the database, false otherwise
+
+    """
     evc_code = request.form.get('energy_voucher_code')
     print(evc_code)
     # check if evc code is valid in the evc table

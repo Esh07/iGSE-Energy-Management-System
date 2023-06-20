@@ -1,0 +1,76 @@
+Register a new user
+A new user can register by providing their email, password, address, property type, number of bedrooms and energy voucher code.
+---
+parameters:
+  - name: email
+    in: formData
+    type: string
+    required: true
+
+  - name: password
+    in: formData
+    type: string
+    required: true
+  - name: confirm_password
+    in: formData
+    type: string
+    required: true
+  - name: address
+    in: formData
+    type: string
+    required: true
+  - name: property_type
+    in: formData
+    type: string
+    required: true
+  - name: num_bedrooms
+    in: formData
+    type: integer
+    required: true
+  - name: evc
+    in: formData
+definitions:
+  Register:
+    type: object
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      confirm_password:
+        type: string
+      address:
+        type: string
+      property_type:
+        type: string
+      num_bedrooms:
+        type: integer
+      evc:
+        type: string
+
+responses:
+  200:
+    description: User registered successfully
+    schema:
+      $ref: "#/definitions/Register"
+    examples:
+      application/json:
+        email: "test@example.com"
+        password: "password"
+        confirm_password: "password"
+        address: "123 Example Street, Example Town, EX4 MPL"
+        property_type: "House"
+        num_bedrooms: 3
+  400:
+    description: Invalid data
+    schema:
+      $ref: "#/definitions/Register"
+    examples:
+      application/json:
+        email: "email is already taken"
+        password: "password must be between 8 and 20 characters"
+        confirm_password: "passwords must match"
+        address: "address is required"
+        property_type: "invalid property type"
+        num_bedrooms: "number of bedrooms must be an integer"
+        evc: "invalid evc"

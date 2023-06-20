@@ -1,0 +1,8 @@
+Logout page
+A user can logout of the system.
+---
+tags:
+  - Logout
+responses:
+  200:
+    description: User logged out successfully

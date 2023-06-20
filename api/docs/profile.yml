@@ -1,0 +1,8 @@
+Profile page
+A user can view their profile page.
+---
+tags:
+  - Profile
+responses:
+  200:
+    description: User profile page
