@@ -11,10 +11,13 @@ from sqlalchemy import func
 from .validator import IsInteger
 import json
 
+from flask_restful import Api, Resource
+from flasgger import Swagger
+
+
+
 # import from forms.py
 # from .forms import RegisterForm, LoginForm, MeterReadingForm
-
-from flask import session
 from datetime import datetime, date
 from flask_migrate import Migrate
 import secrets
@@ -23,6 +26,13 @@ import logging
 valid_evc_codes = ['XTX2GZAD', 'NDA7SY2V', 'RVA7DZ2D', 'DM8LEESR']
 
 app = Flask(__name__)
+app.config['SWAGGER'] = {
+    'title': 'iGSE Energy Management System API',
+    'uiversion': 3
+}
+api = Api(app)
+swagger = Swagger(app)
+
 
 app.config['SECRET_KEY'] = secrets.token_urlsafe(16)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://api_user:123456@localhost:3306/RestServiceInterface'
@@ -1120,6 +1130,11 @@ def check_evc_code():
         return jsonify(not_valid_code=True, message='EVC code is invalid')
 
 
+
 if __name__ == '__main__':
+    # with open('openapi.json', 'w') as f:
+    #     f.write(openapi.json())
     db.create_all()
-    app.run(debug=False)
+    app.run(
+        debug=False # Allow verbose error reports
+        )
