@@ -10,10 +10,9 @@ from sqlalchemy import func
 
 from .validator import IsInteger
 import json
-
+from flasgger import Swagger, Schema, fields
+from flasgger.utils import swag_from
 from flask_restful import Api, Resource
-from flasgger import Swagger
-
 
 
 # import from forms.py
@@ -438,7 +437,7 @@ class TopUpForm(FlaskForm):
     submit = SubmitField('Top Up')
 
 
-@ app.route('/register', methods=['GET', 'POST'])
+@ app.route('/register', methods=['GET', 'POST'], endpoint='register')
 def register():
     # // i will make ajax call to this route
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
@@ -567,7 +566,7 @@ def register():
     return render_template('register.html', form=form)
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'], endpoint='login')
 def login():
     form = LoginForm()
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
@@ -619,7 +618,7 @@ def login():
     return render_template('login.html', form=form)
 
 
-@ app.route('/profile')
+@ app.route('/profile', methods=['GET'], endpoint='profile')
 @ login_required
 def profile():
     if current_user.is_authenticated:
@@ -630,7 +629,7 @@ def profile():
     return render_template('profile.html', user=user)
 
 
-@ app.route('/logout')
+@ app.route('/logout', methods=['GET'], endpoint='logout')
 def logout():
     if current_user.is_authenticated:
         logout_user()
@@ -643,7 +642,7 @@ def logout():
 # def index():
 #     return render_template('index.html')
 
-@ app.route('/home', methods=['GET'])
+@ app.route('/home', methods=['GET'], endpoint='home')
 def index():
     # get flash messages
     messages = get_flashed_messages()
@@ -653,14 +652,14 @@ def index():
     return render_template('index.html', messages=messages)
 
 
-@ app.route('/')
+@ app.route('/', methods=['GET'], endpoint='root')
 def root():
     if current_user.is_authenticated:
         return redirect(url_for('profile'))
     return redirect(url_for('index'))
 
 
-@ app.route('/submit-meter-reading', methods=['GET', 'POST'])
+@ app.route('/submit-meter-reading', methods=['GET', 'POST'], endpoint='submit_meter_reading')
 @ login_required
 def submit_meter_reading():
     if current_user.is_authenticated:
@@ -717,7 +716,7 @@ def submit_meter_reading():
     return render_template('submit_meter_reading.html', form=form)
 
 
-@ app.route('/energy-consumption', methods=['GET'])
+@ app.route('/energy-consumption', methods=['GET'], endpoint='energy_consumption')
 def get_energy_consumption():
     if current_user.is_authenticated:
         customer_id = request.args.get('customer_id')
@@ -737,7 +736,7 @@ def get_energy_consumption():
     return jsonify([energy_consumption.to_dict() for energy_consumption in energy_consumption])
 
 
-@ app.route('/view_latest_bill')
+@ app.route('/view_latest_bill', methods=['GET'], endpoint='view_latest_bill')
 @ login_required
 def view_latest_bill():
     if current_user.is_authenticated:
@@ -757,7 +756,7 @@ def view_latest_bill():
     return render_template('view_bill.html', bill=latest_bill, messages=messages)
 
 
-@ app.route('/pay_bill/<int:bill_id>')
+@ app.route('/pay_bill/<int:bill_id>', methods=['GET'], endpoint='pay_bill')
 @ login_required
 def pay_bill(bill_id):
     if current_user.is_authenticated:
@@ -787,7 +786,7 @@ def pay_bill(bill_id):
 
 
 # top-up
-@ app.route('/top-up', methods=['GET', 'POST'])
+@ app.route('/top-up', methods=['GET', 'POST'], endpoint='top_up')
 @ login_required
 def top_up():
     if current_user.is_authenticated:
@@ -824,7 +823,7 @@ def top_up():
 
 
 # =============------------- Admin Page -----------------==================
-@ app.route('/admin/register', methods=['GET', 'POST'])
+@ app.route('/admin/register', methods=['GET', 'POST'], endpoint='admin_register')
 def admin_register():
     messages = get_flashed_messages()
     print("Admin register")
@@ -860,7 +859,7 @@ def admin_register():
     return render_template('admin_register.html', form=form, messages=messages)
 
 
-@ app.route('/admin/login', methods=['GET', 'POST'])
+@ app.route('/admin/login', methods=['GET', 'POST'], endpoint='admin_login')
 def admin_login():
     # if current_user.is_admin:
     #     return redirect(url_for('admin_dashboard'))
@@ -892,7 +891,7 @@ def admin_login():
     return render_template('admin_login.html', form=form, messages=messages)
 
 
-@ app.route('/admin')
+@ app.route('/admin', endpoint='admin_dashboard')
 def admin_dashboard():
     if not current_user.is_authenticated:
         flash('You must be logged in to access this page.')
@@ -912,14 +911,14 @@ def admin_dashboard():
 # admin logout
 
 
-@ app.route('/admin/logout')
+@ app.route('/admin/logout', endpoint='admin_logout')
 def admin_logout():
     logout_user()
     flash('You are now logged out.')
     return redirect(url_for('index'))
 
 
-@ app.route('/admin/set-tariffs', methods=['GET', 'POST'])
+@ app.route('/admin/set-tariffs', methods=['GET', 'POST'], endpoint='set_tariffs')
 @ login_required
 def set_tariffs():
     if not current_user.is_authenticated:
@@ -955,7 +954,7 @@ def set_tariffs():
     return render_template('set_tariffs.html', form=form)
 
 
-@ app.route('/admin/bills')
+@ app.route('/admin/bills', endpoint='admin_view_bills')
 @ login_required
 def admin_view_bills():
     if not current_user.is_authenticated:
@@ -977,7 +976,7 @@ def admin_view_bills():
 # get the specific bill
 
 
-@ app.route('/admin/bills/<int:bill_id>')
+@ app.route('/admin/bills/<int:bill_id>', endpoint='admin_view_bill')
 @ login_required
 def admin_view_bill(bill_id):
     if not current_user.is_authenticated:
@@ -991,7 +990,7 @@ def admin_view_bill(bill_id):
 
 
 # view all submitted meter readings
-@ app.route('/admin/meter-readings')
+@ app.route('/admin/meter-readings', endpoint='admin_view_meter_readings')
 @ login_required
 def admin_view_meter_readings():
     if not current_user.is_authenticated:
@@ -1006,7 +1005,7 @@ def admin_view_meter_readings():
 # getting the  "Admin can view the energy statistics– show the average gas and electricity consumption (in kWh) per day for all customers based on their latest billing period."
 
 
-@ app.route('/admin/energy-statistics')
+@ app.route('/admin/energy-statistics', endpoint='admin_energy_statistics')
 @ login_required
 def admin_energy_statistics():
     if not current_user.is_authenticated:
@@ -1045,7 +1044,7 @@ def admin_energy_statistics():
 
 
 # ====------- Task 2 API -------====
-@ app.route('/igse/propertycount', methods=['GET'])
+@ app.route('/igse/propertycount', methods=['GET'], endpoint='get_property_count')
 def get_property_count():
     if request.method == 'GET':
         print('get_property_count')
@@ -1067,7 +1066,7 @@ def get_property_count():
     return jsonify(data)
 
 
-@ app.route("/igse/<property_type>/<num_bedrooms>")
+@ app.route("/igse/<property_type>/<num_bedrooms>", methods=['GET'], endpoint='get_energy_usage_stats')
 def energy_usage_stats(property_type, num_bedrooms):
     try:
         # Join the User and Bill tables and filter by property_type and num_bedrooms
@@ -1105,7 +1104,7 @@ def energy_usage_stats(property_type, num_bedrooms):
     )
 
 
-@app.route('/check_email', methods=['POST'])
+@app.route('/check_email', methods=['POST'], endpoint='check_email')
 def check_email():
     email = request.form.get('email')
     user = User.query.filter_by(email=email).first()
@@ -1117,7 +1116,7 @@ def check_email():
 # check evc code is valid
 
 
-@app.route('/check_evc_code', methods=['POST'])
+@ app.route('/check_evc_code', methods=['POST'], endpoint='check_evc_code')
 def check_evc_code():
     evc_code = request.form.get('energy_voucher_code')
     print(evc_code)
@@ -1130,11 +1129,10 @@ def check_evc_code():
         return jsonify(not_valid_code=True, message='EVC code is invalid')
 
 
-
 if __name__ == '__main__':
     # with open('openapi.json', 'w') as f:
     #     f.write(openapi.json())
     db.create_all()
     app.run(
-        debug=False # Allow verbose error reports
-        )
+        debug=False  # Allow verbose error reports
+    )
