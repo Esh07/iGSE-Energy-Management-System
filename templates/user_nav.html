@@ -6,6 +6,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            {% if session.logged_in %}
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <!-- home icon font awesome -->
@@ -15,10 +16,12 @@
                 </li>
                 <li class="nav-item">
                     <!-- meter reading icon font awesome -->
+                    <!-- only show if the user is logged in -->
                     <a class="nav-link" href="{{ url_for('submit_meter_reading') }}">
                         <i class="fas fa-tachometer-alt"></i> Submit Meter Reading
                     </a>
                 </li>
+
                 <li class="nav-item">
                     <!-- top up icon font awesome -->
                     <a class="nav-link" href="{{ url_for('top_up') }}">
@@ -38,6 +41,7 @@
                     </a>
                 </li>
             </ul>
+            {% endif %}
         </div>
     </div>
 </nav>
