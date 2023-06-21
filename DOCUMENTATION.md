@@ -4,11 +4,12 @@
 
 - [Requirements](#requirements)
 - [Environment Setup](#environment-setup)
-  - [Windows](#windows)
-  - [MacOS / Linux](#macos-/-linux)
 - [Installation](#installation)
 - [Database Setup](#database-setup)
 - [Generating Tables from Models](#generating-tables-from-models)
+- [Running the Application](#running-the-application)
+- [API Documentation](#api-documentation)
+- [API Screenshots](#api-endpoints-screenshot)
 
 ## Requirements
 
