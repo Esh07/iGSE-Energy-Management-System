@@ -8,6 +8,7 @@ from flask_login import UserMixin, LoginManager, login_user, login_required, log
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import func
 
+
 from .validator import IsInteger
 import json
 from flasgger import Swagger, Schema, fields
@@ -624,6 +625,44 @@ def login():
             logging.debug(f'Form not valid')
             print("Form not valid - else clause")
     return render_template('login.html', form=form)
+
+
+@app.route('/reset-password', methods=['GET', 'POST'], endpoint='reset_password')
+def reset_password():
+    """ Reset password page
+    A user can reset their password using their email address.
+    ___
+    tags:
+        - Password Reset
+    parameters:
+        - name: email
+          in: query
+          type: string
+          required: true
+          description: The email address of the user
+    responses:
+        200:
+            description: The password has been reset
+        400:
+            description: The email address is not valid
+    """
+    if request.method == 'POST':
+        # Get the username and new password from the form
+        username = request.form['username']
+        new_password = request.form['new_password']
+
+        # Hash the new password
+        hashed_password = generate_password_hash(new_password)
+
+        # Update the user's password in the database
+        # Replace 'users', 'password_hash', and 'email' with the actual names of your table and columns
+        sql = "UPDATE users SET password_hash = %s WHERE email = %s"
+        db.engine.execute(sql, (hashed_password, username))
+
+        flash('Your password has been reset.')
+        return redirect(url_for('login'))
+
+    return render_template('reset_password.html')
 
 
 @app.route('/profile', methods=['GET'], endpoint='profile')
