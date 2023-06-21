@@ -1,9 +1,21 @@
 # iGSE Energy Management System - Webapp
+
 This project was developed as part of a coursework assignment for the Mobile and Web Applications module. The iGSE Energy Management System aims to provide Shangri-La residents with a platform to manage their energy consumption and bills. It includes a web interface and a REST API.
 
-For detailed documentation, please refer to the [Documentation](./DOCUMENTATION.md) file.
+For detailed documentation, please refer to the [:book: Documentation](./DOCUMENTATION.md) file.
+
+For screenshots of the web interface, please refer to the [:camera: Screenshots](./SCREENSHOTS.md) file.
+
+## :computer: Technologies Used
+
+- **Programming Languages**: Python, HTML, CSS, JavaScript
+- **Frameworks**: Flask, Bootstrap
+- **Libraries**: Jinja2, jQuery, QRCode.js
+- **Database**: SQLite
+- **API Testing**: Postman
 
 ## :bulb: Features
+
 - User-friendly web interface for customers to submit meter readings, view bills, and pay bills using energy vouchers.
 - User registration and authentication functionality with secure access to customer accounts.
 - Integration of QR code scanning for easy registration and verification of energy vouchers.
@@ -12,6 +24,7 @@ For detailed documentation, please refer to the [Documentation](./DOCUMENTATION.
 - Robust error handling mechanisms for providing meaningful error messages.
 
 ## :climbing: Challenges Faced
+
 1. <b>User Authentication</b>: Implementing a secure and reliable user authentication system was a significant challenge. I had to ensure that customer passwords were stored securely and that only authorized users could access their accounts.
 
 2. <b>QR Code Scanning</b>: Integrating QR code scanning functionality posed a challenge. I had to research and implement a suitable library or API to read QR codes, validate them, and associate them with customer accounts.
@@ -21,6 +34,7 @@ For detailed documentation, please refer to the [Documentation](./DOCUMENTATION.
 4. <b>Error Handling</b>: Designing an effective error handling system was crucial to providing a smooth user experience. I had to anticipate possible errors and develop error pages or AJAX messages to display meaningful feedback to users.
 
 ## :trophy: Achievements
+
 By completing this project, I accomplished the following:
 
 - Developed a fully functional web interface for iGSE Energy Management System, allowing customers to submit meter readings, view bills, and pay bills using energy vouchers.
@@ -31,6 +45,7 @@ By completing this project, I accomplished the following:
 - Implemented robust error handling mechanisms to provide meaningful error messages for various scenarios.
 
 ## :key: Key Takeaways
+
 The completion of this project provided me with the following crucial learning experiences:
 
 1. <b>Web Development Skills</b>: I gained practical experience in developing web applications using modern technologies and frameworks (Flask). This included frontend development (Jinja2 template engine), backend programming, and integrating various components (QR scanning and DB) to create a cohesive system.
