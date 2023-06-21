@@ -203,7 +203,7 @@ You can set the following environment variables to configure the application:
 
 ## API Documentation
 
-The API documentation is available at http://localhost:5000/api/docs
+The API documentation is available at http://localhost:5000/apidocs/
 
 | Endpoint                               | Method   | Description                                                                                   |
 | -------------------------------------- | -------- | --------------------------------------------------------------------------------------------- |
@@ -211,6 +211,7 @@ The API documentation is available at http://localhost:5000/api/docs
 | `/home`                                | GET      | Home page                                                                                     |
 | `/register`                            | GET POST | Register a new user                                                                           |
 | `/login`                               | GET POST | Login user                                                                                    |
+| `/reset-password`                      | GET POST | Reset user password                                                                           |
 | `/logout`                              | GET      | Logout user                                                                                   |
 | `/profile`                             | GET      | View user profile                                                                             |
 | `/submit-meter-reading`                | GET POST | Submit a meter reading                                                                        |
@@ -231,16 +232,6 @@ The API documentation is available at http://localhost:5000/api/docs
 | `/check_email`                         | POST     | API endpoint to check if an email address is already registered (AJAX)                        |
 | `/check_evc_code`                      | POST     | API endpoint to check if an EVC code is valid (AJAX)                                          |
 
-## Example Screenshots
+## API Endpoints (Screenshot)
 
-### Home Page
-
-![Homepage](docs/img/webpage-screenshots/homepage.png)
-
-### Login Page
-
-![Login page](docs/img/webpage-screenshots/login-page.png)
-
-### Register Page
-
-![Register page](docs/img/webpage-screenshots/register-page.png)
+![Endpoints screenshots](docs/img/webpage-screenshots/api-endpoints-screenshot.png)
