@@ -161,7 +161,8 @@ export FLASK_APP=app.py
 export FLASK_DEBUG=1 # 1 to enable debug mode, 0 to disable debug mode
 ```
 
-<h5>Windows (temporary session)</h5>
+##### Windows (temporary session)
+
 ```bash
 set FLASK_APP=app.py
 set FLASK_DEBUG=1
@@ -229,3 +230,17 @@ The API documentation is available at http://localhost:5000/api/docs
 | `/igse/<property_type>/<num_bedrooms>` | GET      | API endpoint to get the average energy consumption for a property type and number of bedrooms |
 | `/check_email`                         | POST     | API endpoint to check if an email address is already registered (AJAX)                        |
 | `/check_evc_code`                      | POST     | API endpoint to check if an EVC code is valid (AJAX)                                          |
+
+## Example Screenshots
+
+### Home Page
+
+![Homepage](docs/img/webpage-screenshots/homepage.png)
+
+### Login Page
+
+![Login page](docs/img/webpage-screenshots/login-page.png)
+
+### Register Page
+
+![Register page](docs/img/webpage-screenshots/register-page.png)
