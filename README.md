@@ -4,7 +4,7 @@ This project was developed as part of a coursework assignment for the Mobile and
 
 For detailed documentation, please refer to the [:book: Documentation](./DOCUMENTATION.md) file.
 
-For screenshots of the web interface, please refer to the [:camera: Screenshots](./SCREENSHOTS.md) file.
+For screenshots of the web interface, please refer to the [:camera: Screenshots](./Screenshots.md) file.
 
 ## :computer: Technologies Used
 
