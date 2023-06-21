@@ -6,9 +6,30 @@ In this section, it's all about system screenshots. I will list down all the scr
 
 - [Introduction](#introduction)
 - [Table of Contents](#table-of-contents)
-- [Home Page](#home-page)
-- [Login Page](#login-page)
-- [Register Page](#register-page)
+- [:unlock: Open webpages](#open-webpages)
+
+  - [Home Page](#home-page)
+  - [Login Page](#login-page)
+  - [Register Page](#register-page)
+  - [Reset Password Page](#reset-password-page)
+
+- [:closed_lock_with_key: Authenticated webpages (normal users)](#authenticated-webpages-normal-users)
+
+  - [Dashboard Page](#dashboard-page)
+  - [Submit Meter Reading Page](#submit-meter-reading-page)
+  - [View Last Bill Page](#view-last-bill-page)
+  - [Top-up Account Page](#top-up-account-page)
+
+- [:closed_lock_with_key: Authenticated webpages (admin users)](#authenticated-webpages-admin-users)
+
+  - [Admin Dashboard Page](#admin-dashboard-page)
+  - [Set/Update Tariff Page](#setupdate-tariff-page)
+  - [View All meter readings Page](#view-all-meter-readings-page)
+  - [View All Bills Page](#view-all-bills-page)
+  - [View Single Bill Page](#view-single-bill-page)
+
+- [:closed_lock_with_key: Auth Webpage (normal & admin users)](#authenticated-webpages-normal--admin-users)
+  - [Logout Page](#logout-page)
 
 ## Open webpages
 
