@@ -225,3 +225,12 @@ A page for admin users to view statistics of the system.
 A page for users to logout of their account.
 
 </details>
+
+## EVC (Energy Voucher Code) 
+> You can enter your own barcode number into the system. Each energy voucher has a unique 8-digit code called an Energy Voucher Code (EVC). <b>To register, a customer must either scan the voucher's QR code or enter the EVC manually</b>. A newly created customer account is pre-loaded with £200 energy credit. 
+
+Below are a list of valid EVC (Energy Voucher Code) which can be used for testing purpose. A customer must
+enter one of the following EVC (or scan its QR code) to complete the registration or top up the account. (You
+might create additional test cases yourself https://www.qr-code-generator.com/ )
+
+<img width="629" alt="image" src="https://github.com/Esh07/iGSE-Energy-Management-System/assets/32418603/9c183570-4566-425f-b378-78a490da03fe">
