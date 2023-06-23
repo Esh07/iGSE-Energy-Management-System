@@ -1,6 +1,6 @@
 # iGSE Energy Management System - Webapp
 
-This project was developed as part of a coursework assignment for the Mobile and Web Applications module. The iGSE Energy Management System aims to provide Shangri-La residents with a platform to manage their energy consumption and bills. It includes a web interface and a REST API.
+The iGSE Energy Management System aims to provide Shangri-La residents with a platform to manage their energy consumption and bills. It includes a web interface and a REST API.
 
 For detailed documentation, please refer to the [:book: Documentation](./DOCUMENTATION.md) file.
 
@@ -22,20 +22,19 @@ For screenshots of the web interface, please refer to the [:camera: Screenshots]
      - Electricity meter reading - Night (e.g. 250 kWh)
      - Gas meter reading (e.g. 800 kWh)
 3. A customer can view and pay the latest unpaid bill with energy credit.
-4. A customer can top up the credit with a valid EVC*.
+4. A customer can top up the credit with a <a href="./Screenshots.md#evc-energy-voucher-code">valid EVC*</a>.
 
 ### Admin 
+> <b> iGSE admin account:</b> there is only one pre-defined GSE admin account (due to requirement), which has a login name
+“gse@shangrila.gov.un” and a default password “gse@energy”. 
 1. Admin can set the price per kWh (or unit cost) for the electricity (day/night) and gas.
 2. Admin can access meter readings submitted by all customers.
 3. Admin can view the energy statistics– show the average gas and electricity consumption (in kWh)
 per day for all customers based on their latest billing period.
 
----
-- User-friendly web interface for customers to submit meter readings, view bills, and pay bills using energy vouchers.
-- User registration and authentication functionality with secure access to customer accounts.
+### System
 - Integration of QR code scanning for easy registration and verification of energy vouchers.
 - REST API endpoints to provide open access to energy consumption data and statistics.
-- Administrative dashboard for GSE admins to manage unit prices, view customer bills, and generate energy usage statistics.
 - Robust error handling mechanisms for providing meaningful error messages.
 
 ## :climbing: Challenges Faced
