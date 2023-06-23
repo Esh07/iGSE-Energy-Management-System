@@ -15,7 +15,22 @@ For screenshots of the web interface, please refer to the [:camera: Screenshots]
 - **API Testing**: Postman
 
 ## :bulb: Features
+### Customer
+1. A customer can submit new meter readings, which consists of four parts:
+    - Submission date (e.g. 2022-11-05, default value: today)
+    - Electricity meter reading - Day (e.g. 100 kWh)
+     - Electricity meter reading - Night (e.g. 250 kWh)
+     - Gas meter reading (e.g. 800 kWh)
+3. A customer can view and pay the latest unpaid bill with energy credit.
+4. A customer can top up the credit with a valid EVC*.
 
+### Admin 
+1. Admin can set the price per kWh (or unit cost) for the electricity (day/night) and gas.
+2. Admin can access meter readings submitted by all customers.
+3. Admin can view the energy statistics– show the average gas and electricity consumption (in kWh)
+per day for all customers based on their latest billing period.
+
+---
 - User-friendly web interface for customers to submit meter readings, view bills, and pay bills using energy vouchers.
 - User registration and authentication functionality with secure access to customer accounts.
 - Integration of QR code scanning for easy registration and verification of energy vouchers.
