@@ -231,6 +231,6 @@ A page for users to logout of their account.
 
 Below are a list of valid EVC (Energy Voucher Code) which can be used for testing purpose. A customer must
 enter one of the following EVC (or scan its QR code) to complete the registration or top up the account. (You
-might create additional test cases yourself https://www.qr-code-generator.com/ )
+might create additional test cases yourself https://www.qr-code-generator.com/ and update the line of code with your custom created code [here](https://github.com/Esh07/iGSE-Energy-Management-System/blob/main/app.py#L26))
 
 <img width="629" alt="image" src="https://github.com/Esh07/iGSE-Energy-Management-System/assets/32418603/9c183570-4566-425f-b378-78a490da03fe">
