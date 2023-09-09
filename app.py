@@ -367,7 +367,7 @@ class Bill(db.Model):
         flash('Bill created successfully')
         return redirect(url_for('view_latest_bill'))
 
-# ==========---------- Tarric Form class ----------==========
+# ==========---------- Tariff Form class ----------==========
 
 
 class TariffForm(FlaskForm):
@@ -384,7 +384,7 @@ class TariffForm(FlaskForm):
 class MeterReadingForm(FlaskForm):
     # date = DateField('Submission date', validators=[DataRequired()])
 
-    # iwant to make date YYYY-MM-DD and by deault make it today's date
+    # i want to make date YYYY-MM-DD and by default make it today's date
     date = DateField('Submission date', format='%Y-%m-%d',
                      default=datetime.today())
     electricity_day = FloatField(
@@ -432,7 +432,7 @@ class AdminLoginForm(FlaskForm):
 
 
 class TopUpForm(FlaskForm):
-    # my toekn is a string of 8 digits
+    # my token is a string of 8 digits
     evc = StringField('evc', validators=[
         DataRequired(), Length(min=8, max=8)])
     submit = SubmitField('Top Up')
@@ -504,7 +504,7 @@ def register():
         else:
             return jsonify({'status': 'error', 'message': 'Form not validated'})
         # // get evc code from db and check if it exists
-        # // if it exists, check if it has been use
+        # // if it exists, check if it has been used
     else:
 
         form = RegisterForm()
