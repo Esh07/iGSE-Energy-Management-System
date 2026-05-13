@@ -1,24 +1,39 @@
-# iGSE Energy Management System - Webapp
+<div align="center">
 
-iGSE Energy Management System: A tool for managing energy consumption and bills, featuring a web interface and a REST API.
+# ⚡ iGSE Energy Management System
 
-> ⚠️ Demo note: This is a coursework/portfolio project using a seeded local 
-> admin account. In production, credentials must come from environment variables 
-> and never be hardcoded.
+**A full-stack energy billing platform built with Python, Flask, SQLite, and REST API design**
+
+[![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white)](https://python.org)
+[![Flask](https://img.shields.io/badge/Flask-2.x-000000?logo=flask&logoColor=white)](https://flask.palletsprojects.com)
+[![SQLite](https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=white)](https://sqlite.org)
+[![Swagger](https://img.shields.io/badge/Swagger-85EA2D?logo=swagger&logoColor=173647)](https://swagger.io)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+</div>
+
+---
+
+iGSE is a web-based energy management platform that allows customers to submit meter readings, manage bills, and top up energy credit, while giving administrators full control over pricing, billing data, and usage statistics.
+
+Built as a university coursework project, it demonstrates real-world patterns including REST API design, role-based access control, QR voucher integration, and structured database management.
+
 
 For detailed documentation, please refer to the [:book: Documentation](./DOCUMENTATION.md) file.
 
 For screenshots of the web interface, please refer to the [:camera: Screenshots](./Screenshots.md) file.
 
-## :computer: Technologies Used
+## ✨ Features
 
-- **Programming Languages**: Python, HTML, CSS, JavaScript
-- **Frameworks**: Flask, Bootstrap
-- **Libraries**: Jinja2, jQuery, QRCode.js
-- **Database**: SQLite
-- **API Testing**: Postman
+| Area | Capability |
+|---|---|
+| 👤 Customer | Submit meter readings, view & pay bills, top up energy credit via QR vouchers |
+| 🛡️ Admin | Set unit prices, view all customer bills, generate energy usage statistics |
+| 🔐 Auth | Secure registration & login with session management |
+| 📡 REST API | Open endpoints for energy consumption data and statistics |
+| 📷 QR Codes | Voucher scanning for credit verification and registration |
+| ⚠️ Errors | Structured error handling with meaningful HTTP responses |
 
-## :bulb: Features
 ### Customer
 1. A customer can submit new meter readings, which consists of four parts:
     - Submission date (e.g. 2022-11-05, default value: today)
@@ -41,22 +56,14 @@ per day for all customers based on their latest billing period.
 - REST API endpoints to provide open access to energy consumption data and statistics.
 - Robust error handling mechanisms for providing meaningful error messages.
 
-## :climbing: Challenges Faced
+---
 
-1. <b>User Authentication</b>
+## 🛠 Tech Stack
 
-2. <b>QR Code Scanning</b>
+- **Backed**: Python, Flask
+- **Frontend**: HTML5, CSS3, JavaScript (jQuery, QRCode.js), Jinja2 templates, Bootstrap 
+- **Database**: SQLite API,
+- **RESTful**: Auth, Session-based authentication, QR Codes (QR voucher generation and scanning)
+- **API Testing**: Postman
 
-3. <b>Data Management</b>
-
-4. <b>Error Handling</b>
-
-## :trophy: Achievements
-
-By completing this project, I accomplished the following:
-
-- Developed a fully functional web interface for iGSE Energy Management System, allowing customers to submit meter readings, view bills, and pay bills using energy vouchers.
-- Implemented user registration and authentication functionality, ensuring secure access to customer accounts.
-- Integrated QR code scanning feature for easy registration and verification of energy vouchers.
-- Created an administrative dashboard for GSE admins to manage unit prices, view customer bills, and generate energy usage statistics.
-- Implemented robust error handling mechanisms to provide meaningful error messages for various scenarios.
+Follow Documentation is: [Docs](/DOCUMENTATION.md)
