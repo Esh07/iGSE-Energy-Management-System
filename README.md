@@ -2,6 +2,10 @@
 
 iGSE Energy Management System: A tool for managing energy consumption and bills, featuring a web interface and a REST API.
 
+> ⚠️ Demo note: This is a coursework/portfolio project using a seeded local 
+> admin account. In production, credentials must come from environment variables 
+> and never be hardcoded.
+
 For detailed documentation, please refer to the [:book: Documentation](./DOCUMENTATION.md) file.
 
 For screenshots of the web interface, please refer to the [:camera: Screenshots](./Screenshots.md) file.
